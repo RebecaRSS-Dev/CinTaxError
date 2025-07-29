@@ -66,8 +66,39 @@ class Enemy (pygame.sprite.Sprite):
         hitbox_width, hitbox_height = 50, 150
         self.hitbox = pygame.Rect(0, 0, hitbox_width, hitbox_height)
         self.hitbox.center = self.rect.center
-    
-    def perseguir(self,player):
+
+        self.movimentos = [pygame.Vector2(1,0),pygame.Vector2(0,1),pygame.Vector2(-1,0),pygame.Vector2(0,-1)]
+        self.contador = 0
+        self.tempo = pygame.time.get_ticks()
+        self.movimento = self.movimentos[0]
+
+    def patrulha(self, paredes,tempo):
+        tempoFinal = pygame.time.get_ticks()
+        if (tempoFinal-tempo)>=2000:
+            tempo = tempoFinal
+            self.tempo = tempo
+            self.contador += 1
+            if self.contador>3:
+                self.contador = 0
+            self.movimento = self.movimentos[(self.contador)]
+        else:
+            print(self.movimento)
+            moviment = self.movimento*3
+            newPosition = self.rect.move(moviment)
+            newHitbox = self.hitbox
+            if  not any(newHitbox.colliderect(p.rect) for p in paredes):
+                self.rect = newPosition
+            else:
+                self.contador += 2
+                if self.contador>3:
+                    self.contador = self.contador%4-1
+                self.movimento = self.movimentos[(self.contador)]
+                moviment = self.movimento*3
+                newPosition = self.rect.move(moviment)
+                newHitbox = self.hitbox
+                self.rect = newPosition
+
+    def perseguir(self,player,paredes):
         selfVector = pygame.Vector2(self.rect.center)
         vetorNormalizedPlayer = pygame.Vector2(player.rect.center)
         moviment = (vetorNormalizedPlayer-selfVector).normalize()
@@ -76,20 +107,21 @@ class Enemy (pygame.sprite.Sprite):
         newHitbox = self.hitbox.copy()
         newHitbox.center = newPosition.center
 
-        if not newHitbox.colliderect(player.rect):
+        if  not any(newHitbox.colliderect(p.rect) for p in paredes) and not newHitbox.colliderect(player.rect):
             self.rect = newPosition
 
 
-    def move(self,player):
+    def move(self,player,paredes):
         moviment = pygame.Vector2(0,0)
-        moviment.x = 2
         newPosition = self.rect.move(moviment)
         newHitbox = self.hitbox
         if newPosition.colliderect(player.rect):
-            self.perseguir(player)
-        elif (not any(newPosition.colliderect(p.rect) for p in paredes) and
+            self.perseguir(player,paredes)
+        elif (not any(newHitbox.colliderect(p.rect) for p in paredes) and
             not newHitbox.colliderect(player.rect)):
-            self.rect = newPosition
+            self.patrulha(paredes,self.tempo)
+        #elif any(newHitbox.colliderect(p.rect) for p in paredes):
+            
         
             
     def update(self):
@@ -99,8 +131,8 @@ class Enemy (pygame.sprite.Sprite):
 # Instanciando jogador e paredes
 player = Player()
 paredes = [
-    # Parede(300, 100, 50, 400),
-    # Parede(200, 300, 300, 50)
+    Parede(800, 100, 50, 400),
+    #Parede(200, 300, 300, 50)
 ]
 
 inimigo = Enemy(300, 100)
@@ -116,16 +148,17 @@ while True:
 
     teclas = pygame.key.get_pressed()
     player.mover(teclas, paredes, grupo_inimigos)
-    inimigo.move(player)
-
+    inimigo.move(player,paredes)
+    grupo_inimigos.update()
+    
     tela.fill(BRANCO)
+    grupo_inimigos.draw(tela)
     player.desenhar(tela)
 
     for parede in paredes:
         parede.desenhar(tela)
     
-    grupo_inimigos.update()
-    grupo_inimigos.draw(tela)
+    
 
     # Opcional: desenhar a hitbox para verificação visual
     for inim in grupo_inimigos:
