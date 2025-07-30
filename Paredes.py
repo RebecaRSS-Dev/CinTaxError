@@ -19,7 +19,7 @@ relogio = pygame.time.Clock()
 # Classe Player
 class Player:
     def __init__(self):
-        self.rect = pygame.Rect(100, 100, 50, 50)
+        self.rect = pygame.Rect(500, 500, 50, 50)
         self.velocidade = 5
 
     def mover(self, teclas, paredes, inimigos):
@@ -75,6 +75,7 @@ class Enemy (pygame.sprite.Sprite):
     def patrulha(self, paredes,tempo):
         tempoFinal = pygame.time.get_ticks()
         if (tempoFinal-tempo)>=2000:
+            print('mudou')
             tempo = tempoFinal
             self.tempo = tempo
             self.contador += 1
@@ -82,18 +83,18 @@ class Enemy (pygame.sprite.Sprite):
                 self.contador = 0
             self.movimento = self.movimentos[(self.contador)]
         else:
-            print(self.movimento)
-            moviment = self.movimento*3
+            moviment = self.movimento*2
             newPosition = self.rect.move(moviment)
             newHitbox = self.hitbox
             if  not any(newHitbox.colliderect(p.rect) for p in paredes):
                 self.rect = newPosition
             else:
+                print('alterou')
                 self.contador += 2
                 if self.contador>3:
                     self.contador = self.contador%4-1
                 self.movimento = self.movimentos[(self.contador)]
-                moviment = self.movimento*3
+                moviment = self.movimento*2
                 newPosition = self.rect.move(moviment)
                 newHitbox = self.hitbox
                 self.rect = newPosition
@@ -120,8 +121,19 @@ class Enemy (pygame.sprite.Sprite):
         elif (not any(newHitbox.colliderect(p.rect) for p in paredes) and
             not newHitbox.colliderect(player.rect)):
             self.patrulha(paredes,self.tempo)
-        #elif any(newHitbox.colliderect(p.rect) for p in paredes):
-            
+        elif any(newHitbox.colliderect(p.rect) for p in paredes):
+            self.contador += 2
+            print(self.contador)
+            if self.contador>3:
+                print('alterou')
+                self.contador = self.contador - 4
+            self.movimento = self.movimentos[(self.contador)]
+            moviment = self.movimento*3
+            newPosition = self.rect.move(moviment)
+            newHitbox = self.hitbox
+            self.rect = newPosition
+            tempo = pygame.time.get_ticks()
+            self.tempo = tempo
         
             
     def update(self):
@@ -135,7 +147,7 @@ paredes = [
     #Parede(200, 300, 300, 50)
 ]
 
-inimigo = Enemy(300, 100)
+inimigo = Enemy(550,0)
 grupo_inimigos = pygame.sprite.Group()
 grupo_inimigos.add(inimigo)
 
