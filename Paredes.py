@@ -1,4 +1,4 @@
-import pygame
+import pygame # type: ignore
 import sys
 
 # Inicialização
@@ -16,25 +16,38 @@ PRETO = (0, 0, 0)
 # Clock
 relogio = pygame.time.Clock()
 
+class Niveis:
+    def __init__(self,fundo_fase1,fundo_fase2,fundo_fase3,coletaveis):
+        self.niveis = {
+    1: {"fundo": fundo_fase1, "coletaveis": coletaveis([[50, 100, 30, 30],[0,100,30,30]])},
+    2: {"fundo": fundo_fase2, "coletaveis": [pygame.Rect(50, 100, 30, 30), pygame.Rect(700, 400, 30, 30)]},
+    3: {"fundo": fundo_fase3, "coletaveis": [pygame.Rect(150, 500, 30, 30), pygame.Rect(650, 80, 30, 30)]},
+    # Adicione a fase 4 aqui quando tiver
+    # 4: {"fundo": fundo_fase4, "coletaveis": [ ... ]
+    }
+        self.portas = {
+        1: pygame.Rect(100, 50, 80, 120),  # Porta da Fase 1 (x, y, largura, altura)
+        2: pygame.Rect(300, 50, 80, 120),  # Porta da Fase 2
+        3: pygame.Rect(500, 50, 80, 120),  # Porta da Fase 3
+        4: pygame.Rect(700, 50, 80, 120)   # Porta da Fase 4
+    }
+
+
+
+
 #Coletaveis:
 class Coletaveis:
-    def __init__(self):
+    def __init__(self, objetos:tuple):
         self.pontuacao = 0
-        self.coletaveis = [
-    pygame.Rect (100, 100, 30, 30),
-    pygame.Rect (600, 400, 30, 30),
-    pygame.Rect (700, 150, 30, 30)
-]
-        self.coletaveis_coletados = []
-
+        self.coletaveis = []
+        for i in range(len(objetos)):
+            x,y,larg,alt = objetos[i] 
+            self.coletaveis.append(pygame.Rect(x,y,larg,alt))
     def coletar (self, player):
         #logica dos coletaveis:
-        print(self.coletaveis)
-        print(self.coletaveis_coletados)
         for coletavel in self.coletaveis:
             if (player.rect.colliderect(coletavel)):
                 self.pontuacao += 1
-                self.coletaveis_coletados.append(coletavel)
                 self.coletaveis.remove(coletavel)
 
 # Classe Player
@@ -161,9 +174,11 @@ class Enemy (pygame.sprite.Sprite):
         # Se mover inimigo, atualize a hitbox também
         self.hitbox.center = self.rect.center
 
+niveis = Niveis("","","",Coletaveis)
+
 # Instanciando jogador e paredes
 player = Player()
-coletaveis = Coletaveis()
+#coletaveis = Coletaveis()
 paredes = [
     Parede(800, 100, 50, 400),
     #Parede(200, 300, 300, 50)
@@ -192,11 +207,13 @@ while True:
     for parede in paredes:
         parede.desenhar(tela)
 
-    coletaveis.coletar(player)
+    #coletaveis.coletar(player)
     
-    #desenhar os coletaveis:
+    #desenhar os coletaveis da fase atual:
+    coletaveis = niveis.niveis[1]["coletaveis"]
     for coletavel in coletaveis.coletaveis:
         pygame.draw.rect(tela,(0,255,0), coletavel)
+        coletaveis.coletar(player)
 
     # Opcional: desenhar a hitbox para verificação visual
     for inim in grupo_inimigos:
