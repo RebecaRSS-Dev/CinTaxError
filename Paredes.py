@@ -16,6 +16,27 @@ PRETO = (0, 0, 0)
 # Clock
 relogio = pygame.time.Clock()
 
+#Coletaveis:
+class Coletaveis:
+    def __init__(self):
+        self.pontuacao = 0
+        self.coletaveis = [
+    pygame.Rect (100, 100, 30, 30),
+    pygame.Rect (600, 400, 30, 30),
+    pygame.Rect (700, 150, 30, 30)
+]
+        self.coletaveis_coletados = []
+
+    def coletar (self, player):
+        #logica dos coletaveis:
+        print(self.coletaveis)
+        print(self.coletaveis_coletados)
+        for coletavel in self.coletaveis:
+            if (player.rect.colliderect(coletavel)):
+                self.pontuacao += 1
+                self.coletaveis_coletados.append(coletavel)
+                self.coletaveis.remove(coletavel)
+
 # Classe Player
 class Player:
     def __init__(self):
@@ -142,6 +163,7 @@ class Enemy (pygame.sprite.Sprite):
 
 # Instanciando jogador e paredes
 player = Player()
+coletaveis = Coletaveis()
 paredes = [
     Parede(800, 100, 50, 400),
     #Parede(200, 300, 300, 50)
@@ -169,8 +191,12 @@ while True:
 
     for parede in paredes:
         parede.desenhar(tela)
+
+    coletaveis.coletar(player)
     
-    
+    #desenhar os coletaveis:
+    for coletavel in coletaveis.coletaveis:
+        pygame.draw.rect(tela,(0,255,0), coletavel)
 
     # Opcional: desenhar a hitbox para verificação visual
     for inim in grupo_inimigos:
