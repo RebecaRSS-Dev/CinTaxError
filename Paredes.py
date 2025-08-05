@@ -134,7 +134,7 @@ class Enemy (pygame.sprite.Sprite):
                 else:
                     print('colisao')
 
-    def perseguir(self,player,paredes):
+    def perseguir(self,player,paredes,inimigos):
         selfVector = pygame.Vector2(self.rect.center)
         vetorNormalizedPlayer = pygame.Vector2(player.rect.center)
         moviment = (vetorNormalizedPlayer-selfVector).normalize()
@@ -143,7 +143,7 @@ class Enemy (pygame.sprite.Sprite):
         newHitbox = self.hitbox.copy()
         newHitbox.center = newPosition.center
 
-        if  not any(newHitbox.colliderect(p.rect) for p in paredes) and not newHitbox.colliderect(player.rect):
+        if  not any(newHitbox.colliderect(p.rect) for p in paredes) and not newHitbox.colliderect(player.rect) and not any(newHitbox.colliderect(i.hitbox) for i in inimigos if i != self):
             self.rect = newPosition
 
 
@@ -152,7 +152,7 @@ class Enemy (pygame.sprite.Sprite):
         newPosition = self.rect.move(moviment)
         newHitbox = self.hitbox
         if newPosition.colliderect(player.rect):
-            self.perseguir(player,paredes)
+            self.perseguir(player,paredes,inimigos)
         elif (not any(newHitbox.colliderect(p.rect) for p in paredes) and
             not newHitbox.colliderect(player.rect)):
             self.patrulha(paredes,inimigos)
