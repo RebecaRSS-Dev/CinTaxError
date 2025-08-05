@@ -3,8 +3,8 @@ import sys
 
 # Inicialização
 pygame.init()
-largura, altura = 1280, 760
-tela = pygame.display.set_mode((largura, altura))
+largura, altura = 1366, 768
+tela = pygame.display.set_mode((largura, altura), pygame.FULLSCREEN)
 pygame.display.set_caption("Colisão com Paredes")
 
 # Cores
@@ -107,6 +107,7 @@ class Enemy (pygame.sprite.Sprite):
         self.movimento = self.movimentos[self.contador]
 
     def patrulha(self, paredes,inimigos):
+        #Lógica do tempo de patrulha
         tempoFinal = pygame.time.get_ticks()
         if (tempoFinal-self.tempo)>=2000:
             self.tempo = tempoFinal
@@ -114,12 +115,14 @@ class Enemy (pygame.sprite.Sprite):
             if self.contador>3:
                 self.contador = 0
             self.movimento = self.movimentos[(self.contador)]
+        #Se não for hora de mudar direção de movimento
         else:
             moviment = self.movimento*2
             newPosition = self.rect.move(moviment)
             newHitbox = self.hitbox.copy()
             newHitbox.center = newPosition.center
-            if any(newHitbox.colliderect(p.rect) for p in paredes):
+            #Se tocar em parede ou inimigo, 
+            if any(newHitbox.colliderect(p.rect) for p in paredes) or any(newHitbox.colliderect(i.hitbox) for i in inimigos if i != self):
                 self.contador += 2
                 if self.contador>3:
                     self.contador = self.contador - 4
@@ -131,10 +134,10 @@ class Enemy (pygame.sprite.Sprite):
             else:
                 if not any(newHitbox.colliderect(i.hitbox) for i in inimigos if i != self):
                     self.rect = newPosition
-                else:
-                    print('colisao')
+
 
     def perseguir(self,player,paredes,inimigos):
+        #Persegue o player com um vetor que sempre aponta para o centro do sprite
         selfVector = pygame.Vector2(self.rect.center)
         vetorNormalizedPlayer = pygame.Vector2(player.rect.center)
         moviment = (vetorNormalizedPlayer-selfVector).normalize()
@@ -184,19 +187,23 @@ while True:
             sys.exit()
 
     teclas = pygame.key.get_pressed()
+    #Mover o player
     player.mover(teclas, paredes, grupo_inimigos)
+    #Move os inimigos
     for inimigo in inimigos:
         inimigo.move(player,paredes,inimigos)
+    #Atualiza a hitbox do inimivo
     grupo_inimigos.update()
     
+    #Desenha o fundo
     tela.fill(BRANCO)
+    #Atualiza o sprite do inimigo e do player
     grupo_inimigos.draw(tela)
     player.desenhar(tela)
 
+    #Desenha as paredes
     for parede in paredes:
         parede.desenhar(tela)
-
-    #coletaveis.coletar(player)
     
     #desenhar os coletaveis da fase atual:
     coletaveis = niveis.niveis[1]["coletaveis"]
