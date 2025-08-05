@@ -2,14 +2,13 @@ import pygame
 
 pygame.init()
 
-# --- Suas variáveis de tela (agora dinâmicas, o que é ótimo!) ---
+#variaveis do tamanho da teça
 tela = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 largura, altura = tela.get_size()
 pygame.display.set_caption("Tela de Login")
 
-# --- Sua classe Botao (continua perfeita) ---
+#classe botão
 class Botao:
-    # ... (exatamente como antes)
     def __init__(self, x, y, imagem_normal, imagem_selecionada):
         self.imagem_normal = imagem_normal
         self.imagem_selecionada = imagem_selecionada
@@ -31,12 +30,11 @@ try:
     # Imagem de fundo
     imagem_tela_start = pygame.transform.scale(pygame.image.load('Tela inicial.jpg').convert(), (largura, altura))
     
-    # Imagens do Botão JOGAR
+    # Imagens do Botão Start
     botao_jogar_img = pygame.image.load('Frame 2.png').convert_alpha()              
     botao_jogar_selecionado_img = pygame.image.load('Frame 14 (2).png').convert_alpha()
     
-    ### NOVO: Carregar as imagens do botão SAIR
-    # Lembre-se de criar e nomear suas imagens corretamente!
+    # Imagens do botão Quit
     botao_sair_img = pygame.image.load('Frame 2 (1).png').convert_alpha()
     botao_sair_selecionado_img = pygame.image.load('Frame 13.png').convert_alpha()
 
@@ -46,18 +44,16 @@ except pygame.error as e:
 ### --- LÓGICA DE POSICIONAMENTO DO GRUPO --- ###
 
 # 1. DEFINIR AS CONSTANTES DE DESIGN
-porcentagem_vertical = 0.80  # Onde o grupo ficará na tela (70% para baixo)
-espacamento_entre_botoes = 70 # Espaço em pixels entre os dois botões
+porcentagem_vertical = 0.80
+espacamento_entre_botoes = 70
 
 # 2. CALCULAR A ALTURA TOTAL DO BLOCO
-# (Altura do primeiro botão + espaço + altura do segundo botão)
 altura_total_bloco = botao_jogar_img.get_height() + espacamento_entre_botoes + botao_sair_img.get_height()
 
 # 3. ENCONTRAR O PONTO CENTRAL DO BLOCO
 centro_y_bloco = altura * porcentagem_vertical
 
 # 4. CALCULAR A POSIÇÃO Y DE CADA BOTÃO
-# Posição do primeiro botão (JOGAR)
 pos_y_jogar = centro_y_bloco - (altura_total_bloco / 2) + (botao_jogar_img.get_height() / 2)
 
 # Posição do segundo botão (SAIR)
