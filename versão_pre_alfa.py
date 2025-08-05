@@ -24,10 +24,9 @@ class Inimigo(pygame.sprite.Sprite):
     def __init__(self, x, y,inicial):
         super().__init__()
         self.image = pygame.image.load("player.png").convert_alpha()
-        rect_image = self.image.get_rect(center=(x, y))
-        centro = rect_image.center
-        print(centro)
-        self.rect = pygame.Rect(centro[0],centro[1],100,100)
+        self.rect = pygame.Rect(0, 0, 500, 500)  # rect do tamanho que você quer
+        self.rect.center = (x, y)
+        #self.rect = pygame.Rect(x,y,100,100)
        # self.rect.center = rect_image.center
         #self.rect.width = 100
         #self.rect.height = 100
@@ -101,6 +100,13 @@ class Inimigo(pygame.sprite.Sprite):
     def update(self):
         # Se mover inimigo, atualize a hitbox também
         self.hitbox.center = self.rect.center
+    
+    def draw(self, surface):
+        # Centraliza a imagem dentro do rect do inimigo
+        pos_x = self.rect.centerx - self.image.get_width() // 2
+        pos_y = self.rect.centery - self.image.get_height() // 2
+        surface.blit(self.image, (pos_x, pos_y))
+
 
 #Classe player
 class Player:
@@ -193,7 +199,7 @@ class Coletavel:
 background = pygame.transform.scale(pygame.image.load("Background.png").convert(),(largura_tela,altura_tela))
 player = Player()
 Coletaveis = [Coletavel(50,50,1)]
-Inimigos = [Inimigo(500,400,2)]
+Inimigos = [Inimigo(700,700,2)]
 grupo_inimigos = pygame.sprite.Group()
 grupo_inimigos.add(Inimigos)
 
@@ -205,8 +211,7 @@ while True:
     for inimigo in Inimigos:
         inimigo.move(player,[],Inimigos)
         inimigo.update()
-    
-    grupo_inimigos.draw(screen)
+        inimigo.draw(screen)
 
     for inim in grupo_inimigos:
         pygame.draw.rect(screen, (0, 255, 0), inim.hitbox, 2)
