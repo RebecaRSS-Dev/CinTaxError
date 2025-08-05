@@ -3,8 +3,8 @@ import pygame
 pygame.init()
 
 # --- Configurações e Cores ---
-LARGURA_TELA = 800
-ALTURA_TELA = 600
+LARGURA_TELA = 1300
+ALTURA_TELA = 650
 tela = pygame.display.set_mode((LARGURA_TELA, ALTURA_TELA))
 pygame.display.set_caption("Coletáveis com Efeitos Diferentes")
 
