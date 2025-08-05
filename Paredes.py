@@ -3,7 +3,7 @@ import sys
 
 # Inicialização
 pygame.init()
-largura, altura = 1366, 760
+largura, altura = 1280, 760
 tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Colisão com Paredes")
 
@@ -91,7 +91,7 @@ class Parede:
 
 # Classe Enemy usando sprite com hitbox separada
 class Enemy (pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y,inicial):
         super().__init__()
         self.image = pygame.image.load("player.png").convert_alpha()
         self.rect = self.image.get_rect(topleft=(x, y))  # controla onde a imagem é desenhada
@@ -102,16 +102,14 @@ class Enemy (pygame.sprite.Sprite):
         self.hitbox.center = self.rect.center
 
         self.movimentos = [pygame.Vector2(1,0),pygame.Vector2(0,1),pygame.Vector2(-1,0),pygame.Vector2(0,-1)]
-        self.contador = 0
+        self.contador = inicial
         self.tempo = pygame.time.get_ticks()
-        self.movimento = self.movimentos[0]
+        self.movimento = self.movimentos[self.contador]
 
-    def patrulha(self, paredes,tempo):
+    def patrulha(self, paredes,inimigos):
         tempoFinal = pygame.time.get_ticks()
-        if (tempoFinal-tempo)>=2000:
-            print('mudou')
-            tempo = tempoFinal
-            self.tempo = tempo
+        if (tempoFinal-self.tempo)>=2000:
+            self.tempo = tempoFinal
             self.contador += 1
             if self.contador>3:
                 self.contador = 0
@@ -119,19 +117,22 @@ class Enemy (pygame.sprite.Sprite):
         else:
             moviment = self.movimento*2
             newPosition = self.rect.move(moviment)
-            newHitbox = self.hitbox
-            if  not any(newHitbox.colliderect(p.rect) for p in paredes):
-                self.rect = newPosition
-            else:
-                print('alterou')
+            newHitbox = self.hitbox.copy()
+            newHitbox.center = newPosition.center
+            if any(newHitbox.colliderect(p.rect) for p in paredes):
                 self.contador += 2
                 if self.contador>3:
-                    self.contador = self.contador%4-1
+                    self.contador = self.contador - 4
                 self.movimento = self.movimentos[(self.contador)]
                 moviment = self.movimento*2
                 newPosition = self.rect.move(moviment)
                 newHitbox = self.hitbox
                 self.rect = newPosition
+            else:
+                if not any(newHitbox.colliderect(i.hitbox) for i in inimigos if i != self):
+                    self.rect = newPosition
+                else:
+                    print('colisao')
 
     def perseguir(self,player,paredes):
         selfVector = pygame.Vector2(self.rect.center)
@@ -146,7 +147,7 @@ class Enemy (pygame.sprite.Sprite):
             self.rect = newPosition
 
 
-    def move(self,player,paredes):
+    def move(self,player,paredes,inimigos):
         moviment = pygame.Vector2(0,0)
         newPosition = self.rect.move(moviment)
         newHitbox = self.hitbox
@@ -154,20 +155,7 @@ class Enemy (pygame.sprite.Sprite):
             self.perseguir(player,paredes)
         elif (not any(newHitbox.colliderect(p.rect) for p in paredes) and
             not newHitbox.colliderect(player.rect)):
-            self.patrulha(paredes,self.tempo)
-        elif any(newHitbox.colliderect(p.rect) for p in paredes):
-            self.contador += 2
-            print(self.contador)
-            if self.contador>3:
-                print('alterou')
-                self.contador = self.contador - 4
-            self.movimento = self.movimentos[(self.contador)]
-            moviment = self.movimento*3
-            newPosition = self.rect.move(moviment)
-            newHitbox = self.hitbox
-            self.rect = newPosition
-            tempo = pygame.time.get_ticks()
-            self.tempo = tempo
+            self.patrulha(paredes,inimigos)
         
             
     def update(self):
@@ -184,9 +172,9 @@ paredes = [
     #Parede(200, 300, 300, 50)
 ]
 
-inimigo = Enemy(550,0)
+inimigos = [Enemy(300,200,0),Enemy(0,200,2)]
 grupo_inimigos = pygame.sprite.Group()
-grupo_inimigos.add(inimigo)
+grupo_inimigos.add(inimigos)
 
 # Loop principal
 while True:
@@ -197,7 +185,8 @@ while True:
 
     teclas = pygame.key.get_pressed()
     player.mover(teclas, paredes, grupo_inimigos)
-    inimigo.move(player,paredes)
+    for inimigo in inimigos:
+        inimigo.move(player,paredes,inimigos)
     grupo_inimigos.update()
     
     tela.fill(BRANCO)
