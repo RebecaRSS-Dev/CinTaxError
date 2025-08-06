@@ -14,6 +14,7 @@ class Botao:
         self.imagem_selecionada = imagem_selecionada
         self.imagem_atual = self.imagem_normal 
         self.rect = self.imagem_normal.get_rect(center=(x, y))
+    
 
     def checar_hover(self, posicao_mouse):
         if self.rect.collidepoint(posicao_mouse):
@@ -41,33 +42,16 @@ try:
 except pygame.error as e:
     print (f"Erro ao carregar imagens: {e}")
 
-### --- LÓGICA DE POSICIONAMENTO DO GRUPO --- ###
 
-# 1. DEFINIR AS CONSTANTES DE DESIGN
-porcentagem_vertical = 0.80
-espacamento_entre_botoes = 70
-
-# 2. CALCULAR A ALTURA TOTAL DO BLOCO
-altura_total_bloco = botao_jogar_img.get_height() + espacamento_entre_botoes + botao_sair_img.get_height()
-
-# 3. ENCONTRAR O PONTO CENTRAL DO BLOCO
-centro_y_bloco = altura * porcentagem_vertical
-
-# 4. CALCULAR A POSIÇÃO Y DE CADA BOTÃO
-pos_y_jogar = centro_y_bloco - (altura_total_bloco / 2) + (botao_jogar_img.get_height() / 2)
-
-# Posição do segundo botão (SAIR)
-pos_y_sair = centro_y_bloco + (altura_total_bloco / 2) - (botao_sair_img.get_height() / 2)
-
-
-# --- Criação dos objetos Botao com as posições calculadas ---
-# A posição X continua no centro da tela
+#criação dos botoes
+pos_y_jogar = altura * 0.80 - ((botao_jogar_img.get_height() + 20 + botao_sair_img.get_height()) / 2) + (botao_jogar_img.get_height() / 2)
+pos_y_sair = altura * 0.80 + (botao_jogar_img.get_height() + 20 + botao_sair_img.get_height() / 2) - (botao_sair_img.get_height() / 2)
 pos_x_botoes = largura // 2 
 
 botao_jogar = Botao(pos_x_botoes, int(pos_y_jogar), botao_jogar_img, botao_jogar_selecionado_img)
 botao_sair = Botao(pos_x_botoes, int(pos_y_sair), botao_sair_img, botao_sair_selecionado_img)
 
-# Criamos uma lista para facilitar o gerenciamento no loop
+
 lista_de_botoes = [botao_jogar, botao_sair]
 
 # --- Loop principal do jogo ---
