@@ -33,6 +33,13 @@ obstaculos = [
 colisoes = 0
 clock = pygame.time.Clock()
 executando = True
+itens = [
+    pygame.Rect(100, 300, 20, 20),
+    pygame.Rect(600, 350, 20, 20),
+    pygame.Rect(700, 100, 20, 20)
+]
+itens_coletados = 0
+ganhou = False
 
 while executando:
     for evento in pygame.event.get():
@@ -51,20 +58,33 @@ while executando:
 
     byte_rect = pygame.Rect(byte_x, byte_y, byte_width, byte_height)
     
+    colidiu = False
     for obstaculo in obstaculos:
-        if byte_rect.colliderect(obstaculo):
+        if byte_rect.colliderect(obstaculo) and not colidiu:
             colisoes += 1
             byte_x = 50
             byte_y = ALTURA - byte_height - 10
-            break
+            colidiu = True
+
+    for item in itens[:]:
+        if byte_rect.colliderect(item):
+            itens.remove(item)
+            itens_coletados += 1
 
     if colisoes >= 3:
         print("Game Over! Você colidiu 3 vezes.")
         executando = False
 
+    if itens_coletados >= 3 and not ganhou:
+        print("Você ganhou!")
+        ganhou = True
+        executando = False
+
     tela.fill(BRANCO)
     for obstaculo in obstaculos:
         pygame.draw.rect(tela, PRETO, obstaculo)
+    for item in itens:
+        pygame.draw.rect(tela, VERMELHO, item)
     tela.blit(byte_img, (byte_x, byte_y))
 
     pygame.display.flip()
