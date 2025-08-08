@@ -1,5 +1,6 @@
 import pygame
-
+from Inimigo import Inimigo
+from Player import Player
 pygame.init()
 
 #Configuração Geral
@@ -17,127 +18,6 @@ CIANO = (0, 255, 255)
 AMARELO = (255,255,0)
 ROSA = (255, 0, 255)
 BRANCO = (255, 255, 255)
-
-#Classe Inimigos:
-
-class Inimigo(pygame.sprite.Sprite):
-    def __init__(self, x, y,inicial):
-        super().__init__()
-        self.image = pygame.image.load("player.png").convert_alpha()
-        self.rect = pygame.Rect(0, 0, 500, 500)  # rect do tamanho que você quer
-        self.rect.center = (x, y)
-        #self.rect = pygame.Rect(x,y,100,100)
-       # self.rect.center = rect_image.center
-        #self.rect.width = 100
-        #self.rect.height = 100
-        #self.rect = pygame.Rect(x, y, 100, 100)  # cria rect em (0,0) tamanho 100x100
-        #self.rect.center = (x,y)  # centraliza o rect na posição desejada
-
-
-        # hitbox menor, centralizada na imagem
-        hitbox_width, hitbox_height = 50, 50
-        self.hitbox = pygame.Rect(0, 0, hitbox_width, hitbox_height)
-        self.hitbox.center = self.rect.center
-
-        self.movimentos = [pygame.Vector2(1,0),pygame.Vector2(0,1),pygame.Vector2(-1,0),pygame.Vector2(0,-1)]
-        self.contador = inicial
-        self.tempo = pygame.time.get_ticks()
-        self.movimento = self.movimentos[self.contador]
-
-    def patrulha(self, paredes,inimigos):
-        #Lógica do tempo de patrulha
-        tempoFinal = pygame.time.get_ticks()
-        if (tempoFinal-self.tempo)>=2000:
-            self.tempo = tempoFinal
-            self.contador += 1
-            if self.contador>3:
-                self.contador = 0
-            self.movimento = self.movimentos[(self.contador)]
-        #Se não for hora de mudar direção de movimento
-        else:
-            moviment = self.movimento*2
-            newPosition = self.rect.move(moviment)
-            newHitbox = self.hitbox.copy()
-            newHitbox.center = newPosition.center
-            #Se tocar em parede ou inimigo, 
-            if any(newHitbox.colliderect(p.rect) for p in paredes) or any(newHitbox.colliderect(i.hitbox) for i in inimigos if i != self):
-                self.contador += 2
-                if self.contador>3:
-                    self.contador = self.contador - 4
-                self.movimento = self.movimentos[(self.contador)]
-                moviment = self.movimento*2
-                newPosition = self.rect.move(moviment)
-                newHitbox = self.hitbox
-                self.rect = newPosition
-            else:
-                if not any(newHitbox.colliderect(i.hitbox) for i in inimigos if i != self):
-                    self.rect = newPosition
-    def perseguir(self,player,paredes,inimigos):
-        #Persegue o player com um vetor que sempre aponta para o centro do sprite
-        selfVector = pygame.Vector2(self.rect.center)
-        vetorNormalizedPlayer = pygame.Vector2(player.rect.center)
-        moviment = (vetorNormalizedPlayer-selfVector).normalize()
-        moviment = moviment*4
-        newPosition = self.rect.move(moviment)
-        newHitbox = self.hitbox.copy()
-        newHitbox.center = newPosition.center
-
-        if  not any(newHitbox.colliderect(p.rect) for p in paredes) and not newHitbox.colliderect(player.rect) and not any(newHitbox.colliderect(i.hitbox) for i in inimigos if i != self):
-            self.rect = newPosition
-
-
-    def move(self,player,paredes,inimigos):
-        moviment = pygame.Vector2(0,0)
-        newPosition = self.rect.move(moviment)
-        newHitbox = self.hitbox
-        if newPosition.colliderect(player.rect):
-            self.perseguir(player,paredes,inimigos)
-        elif (not any(newHitbox.colliderect(p.rect) for p in paredes) and
-            not newHitbox.colliderect(player.rect)):
-            self.patrulha(paredes,inimigos)
-        
-            
-    def update(self):
-        # Se mover inimigo, atualize a hitbox também
-        self.hitbox.center = self.rect.center
-    
-    def draw(self, surface):
-        # Centraliza a imagem dentro do rect do inimigo
-        pos_x = self.rect.centerx - self.image.get_width() // 2
-        pos_y = self.rect.centery - self.image.get_height() // 2
-        surface.blit(self.image, (pos_x, pos_y))
-
-
-#Classe player
-class Player:
-    def __init__(self):
-        self.rect = pygame.Rect(0, 0, 50, 50)
-        self.velocidade = 5
-
-    def mover(self, teclas, paredes, inimigos):
-        movimento = pygame.Vector2(0, 0)
-
-        if teclas[pygame.K_LEFT]:
-            movimento.x = -self.velocidade
-        elif teclas[pygame.K_RIGHT]:
-            movimento.x = self.velocidade
-        if teclas[pygame.K_UP]:
-            movimento.y = -self.velocidade
-        elif teclas[pygame.K_DOWN]:
-            movimento.y = self.velocidade
-
-        if movimento.length() != 0:
-            movimento = movimento.normalize() * self.velocidade
-
-        novo_rect = self.rect.move(movimento)
-        
-        # Verifica colisão com paredes e hitbox dos inimigos
-        if (not any(novo_rect.colliderect(p.rect) for p in paredes) and
-            not any(novo_rect.colliderect(i.hitbox) for i in inimigos)):
-            self.rect = novo_rect
-
-    def desenhar(self, superficie):
-        pygame.draw.rect(superficie, AZUL, self.rect)
 
 #Classe coletaveis:
 class Coletavel:
@@ -198,13 +78,20 @@ class Coletavel:
 
 background = pygame.transform.scale(pygame.image.load("Background.png").convert(),(largura_tela,altura_tela))
 player = Player()
+
+paredes = []
+
 Coletaveis = [Coletavel(50,50,1)]
-Inimigos = [Inimigo(700,700,2)]
+
+Inimigos = [Inimigo(700,700,2),Inimigo(300,300,1)]
 grupo_inimigos = pygame.sprite.Group()
 grupo_inimigos.add(Inimigos)
 
 while True:
+    teclasPressionadas = pygame.key.get_pressed()
+    player.mover(teclasPressionadas,paredes,Inimigos)
     screen.blit(background, (0, 0))
+    player.desenhar(screen)
     Coletaveis[0].update()
     Coletaveis[0].desenhar(screen)
 
