@@ -1,4 +1,5 @@
 import pygame
+import pytmx
 from Inimigo import Inimigo
 from Player import Player
 pygame.init()
@@ -18,6 +19,14 @@ CIANO = (0, 255, 255)
 AMARELO = (255,255,0)
 ROSA = (255, 0, 255)
 BRANCO = (255, 255, 255)
+
+class Obstacle(pygame.sprite.Sprite):
+    """ Classe simples para representar os obstáculos do mapa. """
+    def __init__(self, rect):
+        super().__init__()
+        self.rect = rect
+        self.image = pygame.Surface(self.rect.size).convert_alpha()
+        self.image.fill((255, 0, 0, 100))
 
 #Classe coletaveis:
 class Coletavel:
@@ -76,6 +85,56 @@ class Coletavel:
         tela.blit(self.image, self.rect.topleft)
 
 
+def desenhar_mapa(surface, mapa):
+    for camada in mapa.visible_layers:
+        if isinstance(camada, pytmx.TiledTileLayer):
+            for x, y, gid in camada:
+                tile_imagem = mapa.get_tile_image_by_gid(gid)
+                if tile_imagem: surface.blit(tile_imagem, (x * mapa.tilewidth, y * mapa.tileheight))
+        elif isinstance(camada, pytmx.TiledObjectGroup):
+            if camada.name not in ['Collisions', 'Coast', 'Objects']:
+                for obj in camada:
+                    if obj.visible and obj.name != 'player_start':
+                        obj_imagem = mapa.get_tile_image_by_gid(obj.gid)
+                        if obj_imagem:
+                            # Ajusta o posicionamento de objetos visuais rotacionados
+                            if obj.rotation in [90, 270]:
+                                surface.blit(obj_imagem, (obj.x, obj.y - obj.width))
+                            else:
+                                surface.blit(obj_imagem, (obj.x, obj.y - obj.height))
+
+
+mapa_tiled = pytmx.load_pygame("data\maps\grad1.tmx")
+map_largura_pixels = mapa_tiled.width * mapa_tiled.tilewidth
+map_altura_pixels = mapa_tiled.height * mapa_tiled.tileheight
+
+grupo_colisao = pygame.sprite.Group()
+camadas_de_colisao = ['Collisions', 'Coast', 'Objects']
+
+for camada_nome in camadas_de_colisao:
+    try:
+        camada = mapa_tiled.get_layer_by_name(camada_nome)
+        
+        if isinstance(camada, pytmx.TiledTileLayer):
+            for x, y, gid in camada:
+                if gid:
+                    rect_colisao = pygame.Rect(
+                        x * mapa_tiled.tilewidth,
+                        y * mapa_tiled.tileheight,
+                        mapa_tiled.tilewidth,
+                        mapa_tiled.tileheight
+                    )
+                    grupo_colisao.add(Obstacle(rect_colisao))
+        
+        elif isinstance(camada, pytmx.TiledObjectGroup):
+            for obj in camada:
+                if obj.visible:
+                    rect_colisao = pygame.Rect(obj.x, obj.y-50, obj.width, obj.height)
+                    grupo_colisao.add(Obstacle(rect_colisao))
+
+    except ValueError:
+        pass
+
 background = pygame.transform.scale(pygame.image.load("Background.png").convert(),(largura_tela,altura_tela))
 player = Player()
 
@@ -83,23 +142,26 @@ paredes = []
 
 Coletaveis = [Coletavel(50,50,1)]
 
-Inimigos = [Inimigo(700,700,2),Inimigo(300,300,1)]
+Inimigos = [Inimigo(700,700,2),Inimigo(350,350,1)]
 grupo_inimigos = pygame.sprite.Group()
 grupo_inimigos.add(Inimigos)
 
 while True:
     teclasPressionadas = pygame.key.get_pressed()
-    player.mover(teclasPressionadas,paredes,Inimigos)
+    player.mover(teclasPressionadas,grupo_colisao,Inimigos)
     screen.blit(background, (0, 0))
+    desenhar_mapa(screen, mapa_tiled)
     player.desenhar(screen)
     Coletaveis[0].update()
     Coletaveis[0].desenhar(screen)
 
     for inimigo in Inimigos:
-        inimigo.move(player,[],Inimigos)
+        inimigo.move(player,grupo_colisao,Inimigos)
         inimigo.update()
         inimigo.draw(screen)
 
+    pygame.draw.rect(screen,(255, 255, 0),player.rect,2)
+    grupo_colisao.draw(screen)
     for inim in grupo_inimigos:
         pygame.draw.rect(screen, (0, 255, 0), inim.hitbox, 2)
         pygame.draw.rect(screen, (255, 255, 0), inim.rect, 2)  # verde, linha 2 px

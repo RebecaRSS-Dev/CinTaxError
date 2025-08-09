@@ -10,7 +10,8 @@ class Player:
 
         # Rect
         self.image = self.frames[self.frame_atual]
-        self.rect = self.image.get_rect(center=(100, 100))
+        self.image = pygame.transform.scale(self.image,(25,25))
+        self.rect = self.image.get_rect(center=(500, 500))
         self.velocidade = 6
 
     def carregar_frames(self, caminho, total_frames, largura, altura):
@@ -34,6 +35,7 @@ class Player:
             self.image = self.frames[self.frame_atual]
         if teclas[pygame.K_UP]:
             movimento.y = -self.velocidade
+            self.frames = self.carregar_frames("imagens/Sprites/ByteBackWalk.png", 2, 160, 160)
         elif teclas[pygame.K_DOWN]:
             movimento.y = self.velocidade
             self.frames = self.carregar_frames("imagens/Sprites/ByteDownWalk.png", 2, 64, 64)
@@ -54,10 +56,13 @@ class Player:
                 self.tempo_animacao = agora
                 self.frame_atual = (self.frame_atual + 1) % len(self.frames)
                 self.image = self.frames[self.frame_atual]
+                self.image = pygame.transform.scale(self.image,(52,52))
         else:
             # Parado = primeiro frame
             self.frame_atual = 0
             self.image = self.frames[0]
+            self.image = pygame.transform.scale(self.image,(52,52))
 
     def desenhar(self, superficie):
+        self.image = pygame.transform.scale(self.image,(52,52))
         superficie.blit(self.image, self.rect)
