@@ -5,10 +5,9 @@ from Player import Player
 pygame.init()
 
 #Configuração Geral
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
-largura_tela = 1366 
-altura_tela = 768
-screen = pygame.display.set_mode((largura_tela, altura_tela))
+largura_tela, altura_tela = screen.get_size()
 
 #Cores:
 PRETO = (0, 0, 0)
@@ -31,27 +30,21 @@ class Obstacle(pygame.sprite.Sprite):
 #Classe coletaveis:
 class Coletavel:
     def __init__(self, x, y, tipo):
-
         self.rect = pygame.Rect(x, y, 30, 30)
         self.tipo = tipo
         self.duracao_efeito = 0
-
         #analisar qual o tipo do coletavel:
         if (self.tipo == 1):
             self.cor = AZUL
             self.pontos = 5
-        
         else:
             self.duracao_efeito = 5000
-
             if (self.tipo == 2):
                 self.cor = VERDE
                 self.pontos = 0
-            
             elif (self.tipo == 3):
                 self.cor = CIANO
                 self.pontos = 0
-
         self.spritesheet = pygame.image.load("New Piskel.png").convert_alpha()
         self.frame_width = 32
         self.frame_height = 32
@@ -79,63 +72,92 @@ class Coletavel:
             self.frame_timer = 0
             self.current_frame = (self.current_frame + 1) % len(self.frames)
             self.image = self.frames[self.current_frame]
-        
+    
     #desenhar:
     def desenhar (self, tela):
         tela.blit(self.image, self.rect.topleft)
 
+# --- INÍCIO DAS MODIFICAÇÕES PARA ESCALA ---
+class Niveis:
+    def __init__(self,arquivo_tmx, largura_tela, altura_tela):
+        self.mapa_tiled = pytmx.load_pygame(arquivo_tmx)
 
-def desenhar_mapa(surface, mapa):
-    for camada in mapa.visible_layers:
-        if isinstance(camada, pytmx.TiledTileLayer):
-            for x, y, gid in camada:
-                tile_imagem = mapa.get_tile_image_by_gid(gid)
-                if tile_imagem: surface.blit(tile_imagem, (x * mapa.tilewidth, y * mapa.tileheight))
-        elif isinstance(camada, pytmx.TiledObjectGroup):
-            if camada.name not in ['Collisions', 'Coast', 'Objects']:
-                for obj in camada:
-                    if obj.visible and obj.name != 'player_start':
-                        obj_imagem = mapa.get_tile_image_by_gid(obj.gid)
-                        if obj_imagem:
-                            # Ajusta o posicionamento de objetos visuais rotacionados
-                            if obj.rotation in [90, 270]:
-                                surface.blit(obj_imagem, (obj.x, obj.y - obj.width))
-                            else:
-                                surface.blit(obj_imagem, (obj.x, obj.y - obj.height))
+        # 1. CALCULAR FATOR DE ESCALA
+        map_altura_pixels_original = self.mapa_tiled.height * self.mapa_tiled.tileheight
+        self.fator_escala = altura_tela / map_altura_pixels_original
 
+        # 2. CALCULAR NOVAS DIMENSÕES E OFFSET
+        map_largura_pixels_escalada = (self.mapa_tiled.width * self.mapa_tiled.tilewidth) * self.fator_escala
+        self.tile_width_escalado = self.mapa_tiled.tilewidth * self.fator_escala
+        self.tile_height_escalado = self.mapa_tiled.tileheight * self.fator_escala
 
-mapa_tiled = pytmx.load_pygame("data\maps\grad1.tmx")
-map_largura_pixels = mapa_tiled.width * mapa_tiled.tilewidth
-map_altura_pixels = mapa_tiled.height * mapa_tiled.tileheight
+        self.offset_x = (largura_tela - map_largura_pixels_escalada) / 2
+        self.offset_y = 0  # O mapa começa no topo da tela
 
-grupo_colisao = pygame.sprite.Group()
-camadas_de_colisao = ['Collisions', 'Coast', 'Objects']
+        # Cache para armazenar imagens já redimensionadas e evitar trabalho repetido
+        self.cache_tiles = {}
 
-for camada_nome in camadas_de_colisao:
-    try:
-        camada = mapa_tiled.get_layer_by_name(camada_nome)
-        
-        if isinstance(camada, pytmx.TiledTileLayer):
-            for x, y, gid in camada:
-                if gid:
-                    rect_colisao = pygame.Rect(
-                        x * mapa_tiled.tilewidth,
-                        y * mapa_tiled.tileheight,
-                        mapa_tiled.tilewidth,
-                        mapa_tiled.tileheight
-                    )
-                    grupo_colisao.add(Obstacle(rect_colisao))
-        
-        elif isinstance(camada, pytmx.TiledObjectGroup):
-            for obj in camada:
-                if obj.visible:
-                    rect_colisao = pygame.Rect(obj.x, obj.y-50, obj.width, obj.height)
-                    grupo_colisao.add(Obstacle(rect_colisao))
+        self.grupo_colisao = self.criar_colisoes()
 
-    except ValueError:
-        pass
+    def desenhar_mapa(self,surface):
+        for camada in self.mapa_tiled.visible_layers:
+            if isinstance(camada, pytmx.TiledTileLayer):
+                for x, y, gid in camada:
+                    if gid == 0: continue # Pula tiles vazios
+                    
+                    tile_imagem = self.cache_tiles.get(gid)
+                    if not tile_imagem:
+                        # Se a imagem não está no cache, redimensiona e armazena
+                        imagem_original = self.mapa_tiled.get_tile_image_by_gid(gid)
+                        if imagem_original:
+                            dimensoes_escaladas = (int(self.tile_width_escalado), int(self.tile_height_escalado))
+                            tile_imagem = pygame.transform.scale(imagem_original, dimensoes_escaladas)
+                            self.cache_tiles[gid] = tile_imagem
+                    
+                    if tile_imagem:
+                        pos_x = x * self.tile_width_escalado + self.offset_x
+                        pos_y = y * self.tile_height_escalado + self.offset_y
+                        surface.blit(tile_imagem, (pos_x, pos_y))
 
-background = pygame.transform.scale(pygame.image.load("Background.png").convert(),(largura_tela,altura_tela))
+    # 3. CRIAR COLISÕES COM A ESCALA APLICADA
+    def criar_colisoes(self):
+        grupo_colisao = pygame.sprite.Group()
+        camadas_de_colisao = ['Collisions', 'Coast', 'Objects']
+
+        for camada_nome in camadas_de_colisao:
+            try:
+                camada = self.mapa_tiled.get_layer_by_name(camada_nome)
+                
+                if isinstance(camada, pytmx.TiledTileLayer):
+                    for x, y, gid in camada:
+                        if gid:
+                            rect_colisao = pygame.Rect(
+                                x * self.tile_width_escalado + self.offset_x,
+                                y * self.tile_height_escalado + self.offset_y,
+                                self.tile_width_escalado,
+                                self.tile_height_escalado
+                            )
+                            grupo_colisao.add(Obstacle(rect_colisao))
+                
+                elif isinstance(camada, pytmx.TiledObjectGroup):
+                    for obj in camada:
+                        if obj.visible:
+                            rect_colisao = pygame.Rect(
+                                obj.x * self.fator_escala + self.offset_x, 
+                                obj.y * self.fator_escala + self.offset_y, 
+                                obj.width * self.fator_escala, 
+                                obj.height * self.fator_escala
+                            )
+                            grupo_colisao.add(Obstacle(rect_colisao))
+
+            except ValueError:
+                pass
+        return grupo_colisao
+
+# --- FIM DAS MODIFICAÇÕES PARA ESCALA ---
+
+NivelAtual = Niveis('data\maps\grad1.tmx',largura_tela,altura_tela)
+
 player = Player()
 
 paredes = []
@@ -145,12 +167,14 @@ Coletaveis = [Coletavel(50,50,1)]
 Inimigos = [Inimigo(700,700,2),Inimigo(350,350,1)]
 grupo_inimigos = pygame.sprite.Group()
 grupo_inimigos.add(Inimigos)
+grupo_colisao = pygame.sprite.Group()
+grupo_colisao.add(NivelAtual.grupo_colisao)
 
 while True:
     teclasPressionadas = pygame.key.get_pressed()
     player.mover(teclasPressionadas,grupo_colisao,Inimigos)
-    screen.blit(background, (0, 0))
-    desenhar_mapa(screen, mapa_tiled)
+    screen.fill(PRETO)
+    NivelAtual.desenhar_mapa(screen)
     player.desenhar(screen)
     Coletaveis[0].update()
     Coletaveis[0].desenhar(screen)

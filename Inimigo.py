@@ -23,7 +23,7 @@ class Inimigo(pygame.sprite.Sprite):
         self.rect.center = (x, y)
 
         # Hitbox menor
-        hitbox_width, hitbox_height = 100, 100
+        hitbox_width, hitbox_height = 50, 80
         self.hitbox = pygame.Rect(0, 0, hitbox_width, hitbox_height)
         self.hitbox.center = self.rect.center
 
@@ -97,7 +97,7 @@ class Inimigo(pygame.sprite.Sprite):
             self.image = self.frames[0]
 
     def draw(self, surface):
-        self.image = pygame.transform.scale(self.image,(128,128))
+        self.image = pygame.transform.scale(self.image,(80,80))
         pos_x = self.rect.centerx - self.image.get_width() // 2
         pos_y = self.rect.centery - self.image.get_height() // 2
         surface.blit(self.image, (pos_x, pos_y))
