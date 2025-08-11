@@ -5,7 +5,7 @@ from Player import Player
 pygame.init()
 
 #Configuração Geral
-screen = pygame.display.set_mode((1366, 768))
+screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 
 largura_tela, altura_tela = screen.get_size()
 
@@ -18,6 +18,107 @@ CIANO = (0, 255, 255)
 AMARELO = (255,255,0)
 ROSA = (255, 0, 255)
 BRANCO = (255, 255, 255)
+
+#classe botão
+class Botao:
+    def __init__(self, x, y, imagem_normal, imagem_selecionada):
+        self.imagem_normal = imagem_normal
+        self.imagem_selecionada = imagem_selecionada
+        self.imagem_atual = self.imagem_normal 
+        self.rect = self.imagem_normal.get_rect(center=(x, y))
+    
+
+    def checar_hover(self, posicao_mouse):
+        if self.rect.collidepoint(posicao_mouse):
+            self.imagem_atual = self.imagem_selecionada
+        else:
+            self.imagem_atual = self.imagem_normal
+    
+    def desenhar(self, tela):
+        tela.blit(self.imagem_atual, self.rect)
+
+
+class Fluxo:
+    # --- Seção de carregamento e posicionamento ---
+    def __init__(self):
+        self.derrotado = False
+        self.vitoria = False
+        self.start = True
+        self.jogando = False
+        self.rodando = True
+
+        try:
+        # Imagem de fundo
+            self.imagem_tela_start = pygame.transform.scale(pygame.image.load('imagens\Telas\Tela inicial.jpg').convert(), (largura_tela, altura_tela))
+            
+            # Imagens do Botão Start
+            self.botao_jogar_img = pygame.image.load('imagens\Telas\Botao_start.png').convert_alpha()              
+            self.botao_jogar_selecionado_img = pygame.image.load('imagens\Telas\Botao_start_selecionado.png').convert_alpha()
+            
+            # Imagens do botão Quit
+            self.botao_sair_img = pygame.image.load('imagens\Telas\Botao_quit.png').convert_alpha()
+            self.botao_sair_selecionado_img = pygame.image.load('imagens\Telas\Botao_quit_selecionado.png').convert_alpha()
+
+        except pygame.error as e:
+            print (f"Erro ao carregar imagens: {e}")
+
+        #criação dos botoes
+        pos_y_jogar = altura_tela * 0.80 - ((self.botao_jogar_img.get_height() + 20 + self.botao_sair_img.get_height()) / 2) + (self.botao_jogar_img.get_height() / 2)
+        pos_y_sair = altura_tela * 0.80 + (self.botao_jogar_img.get_height() + 20 + self.botao_sair_img.get_height() / 2) - (self.botao_sair_img.get_height() / 2)
+        pos_x_botoes = largura_tela // 2 
+
+        botao_jogar = Botao(pos_x_botoes, int(pos_y_jogar), self.botao_jogar_img, self.botao_jogar_selecionado_img)
+        botao_sair = Botao(pos_x_botoes, int(pos_y_sair), self.botao_sair_img, self.botao_sair_selecionado_img)
+
+        self.lista_de_botoes = [botao_jogar, botao_sair]
+
+    def telaDeStart(self,tela,botao_sair,botao_jogar,lista_de_botoes,imagem_tela_start):
+        posicao_mouse = pygame.mouse.get_pos()
+        # --- Seção de Eventos ---
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.rodando = False
+            ### NOVO: Lógica de clique para o botão SAIR
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if botao_sair.rect.collidepoint(posicao_mouse):
+                    self.rodando = False # Fecha o jogo ao clicar em SAIR
+                    pygame.quit()
+                if botao_jogar.rect.collidepoint(posicao_mouse):
+                    print("Clicou em JOGAR! (Aqui você mudaria para a tela do jogo)")
+                    self.jogando = True
+                    self.start = False
+
+        # --- Seção de Desenho ---
+        tela.blit(imagem_tela_start, (0,0))
+
+        # Desenha todos os botões da lista
+        for botao in lista_de_botoes:
+            botao.checar_hover(posicao_mouse)
+            botao.desenhar(tela)
+    def telaDeGameOver(self):
+        pass
+    def jogo(self,player, NivelAtual, grupo_colisao, Inimigos, Coletaveis, grupo_inimigos):
+        teclasPressionadas = pygame.key.get_pressed()
+        player.mover(teclasPressionadas,grupo_colisao,Inimigos)
+        screen.fill(PRETO)
+        NivelAtual.desenhar_mapa(screen)
+        player.desenhar(screen)
+        player.efeitos(Coletaveis)
+        for coletavel in Coletaveis:
+            coletavel.update()
+            coletavel.desenhar(screen)
+            pygame.draw.rect(screen, coletavel.cor, coletavel.rect,2)
+
+        for inimigo in Inimigos:
+            inimigo.move(player,grupo_colisao,Inimigos)
+            inimigo.update()
+            inimigo.draw(screen)
+
+        pygame.draw.rect(screen,(255, 255, 0),player.rect,2)
+        grupo_colisao.draw(screen)
+        for inim in grupo_inimigos:
+            pygame.draw.rect(screen, (0, 255, 0), inim.hitbox, 2)
+            pygame.draw.rect(screen, (255, 255, 0), inim.rect, 2)
 
 class Obstacle(pygame.sprite.Sprite):
     """ Classe simples para representar os obstáculos do mapa. """
@@ -80,7 +181,7 @@ class Coletavel:
 
 # --- INÍCIO DAS MODIFICAÇÕES PARA ESCALA ---
 class Niveis:
-    def __init__(self,arquivo_tmx, largura_tela, altura_tela,inimigos,colecionaveis):
+    def __init__(self,arquivo_tmx, largura_tela, altura_tela,player,inimigos,colecionaveis):
         self.mapa_tiled = pytmx.load_pygame(arquivo_tmx)
 
         # 1. CALCULAR FATOR DE ESCALA
@@ -99,6 +200,7 @@ class Niveis:
         self.cache_tiles = {}
 
         #Criar os Grupos
+        self.player = player
         self.grupo_colisao = self.criar_colisoes()
         self.grupo_inimigos = inimigos
         self.grupo_colecionaveis = colecionaveis
@@ -162,53 +264,49 @@ class Niveis:
 # --- FIM DAS MODIFICAÇÕES PARA ESCALA ---
 
 # Inicialização dos níveis
-ObjetosNiveis ={1:Niveis('data\maps\grad1.tmx',largura_tela,altura_tela,[Inimigo(700,700,2),Inimigo(350,350,1)],[Coletavel(500, 600, 1), Coletavel(300, 500, 2)]),
-                2:Niveis('data\maps\grad2.tmx',largura_tela,altura_tela,[],[])
+ObjetosNiveis ={1:Niveis('data\maps\grad1.tmx',largura_tela,altura_tela,Player(50,50),[Inimigo(700,700,2),Inimigo(350,350,1)],[Coletavel(500, 600, 1), Coletavel(300, 500, 2)]),
+                2:Niveis('data\maps\grad2.tmx',largura_tela,altura_tela,Player(50,50),[Inimigo(350,350,1)],[Coletavel(300, 500, 2)])
                 #3:Niveis('data\maps\grad3.tmx',largura_tela,altura_tela,[]),
                 #4:Niveis('data\maps\grad4.tmx',largura_tela,altura_tela,[]),
 }
 
-NivelAtual = ObjetosNiveis[1]
+fluxoDeJogo = Fluxo()
 
-player = Player()
+nivelAtual = 1
+ObjNivel = ObjetosNiveis[nivelAtual]
+def CarregarNivel(ObjNivel):
 
-paredes = []
+    Coletaveis = ObjNivel.grupo_colecionaveis
 
-Coletaveis = NivelAtual.grupo_colecionaveis
+    # Inimigos
+    Inimigos = ObjNivel.grupo_inimigos
+    grupo_inimigos = pygame.sprite.Group()
+    grupo_inimigos.add(Inimigos)
 
-# Inimigos
-Inimigos = NivelAtual.grupo_inimigos
-grupo_inimigos = pygame.sprite.Group()
-grupo_inimigos.add(Inimigos)
+    grupo_colisao = pygame.sprite.Group()
+    grupo_colisao.add(ObjNivel.grupo_colisao)
 
-grupo_colisao = pygame.sprite.Group()
-grupo_colisao.add(NivelAtual.grupo_colisao)
+    return grupo_colisao, Inimigos, Coletaveis, grupo_inimigos
 
+timeInicial = pygame.time.get_ticks()
 while True:
-    teclasPressionadas = pygame.key.get_pressed()
-    player.mover(teclasPressionadas,grupo_colisao,Inimigos)
-    screen.fill(PRETO)
-    NivelAtual.desenhar_mapa(screen)
-    player.desenhar(screen)
-    player.efeitos(Coletaveis)
-    print(player.vidas)
-    print(player.efeito)
-    for coletavel in Coletaveis:
-        coletavel.update()
-        coletavel.desenhar(screen)
-        pygame.draw.rect(screen, coletavel.cor, coletavel.rect,2)
-
-    for inimigo in Inimigos:
-        inimigo.move(player,grupo_colisao,Inimigos)
-        inimigo.update()
-        inimigo.draw(screen)
-
-    pygame.draw.rect(screen,(255, 255, 0),player.rect,2)
-    grupo_colisao.draw(screen)
-    for inim in grupo_inimigos:
-        pygame.draw.rect(screen, (0, 255, 0), inim.hitbox, 2)
-        pygame.draw.rect(screen, (255, 255, 0), inim.rect, 2)
-
+    if fluxoDeJogo.start:
+        fluxoDeJogo.telaDeStart(screen, fluxoDeJogo.lista_de_botoes[1], fluxoDeJogo.lista_de_botoes[0], fluxoDeJogo.lista_de_botoes, fluxoDeJogo.imagem_tela_start)
+    if fluxoDeJogo.jogando:
+        grupo_colisao, Inimigos, Coletaveis, grupo_inimigos = CarregarNivel(ObjNivel)
+        fluxoDeJogo.jogo(ObjNivel.player, ObjNivel, grupo_colisao, Inimigos, Coletaveis, grupo_inimigos)
+    if fluxoDeJogo.derrotado:
+        fluxoDeJogo.telaDeGameOver()
+    timeFinal = pygame.time.get_ticks()
+    if timeFinal - timeInicial > 5000:
+        print('oi')
+        timeInicial = pygame.time.get_ticks()
+        if nivelAtual+1 <= len(ObjetosNiveis):
+            nivelAtual+=1
+            ObjNivel = ObjetosNiveis[nivelAtual]
+        else:
+            nivelAtual=1
+            ObjNivel = ObjetosNiveis[nivelAtual]
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -217,5 +315,5 @@ while True:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 exit()
-    #pygame.display.flip()
+    pygame.display.flip()
     pygame.time.Clock().tick(60)

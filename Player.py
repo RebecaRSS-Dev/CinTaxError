@@ -1,7 +1,7 @@
 import pygame
 
 class Player:
-    def __init__(self):
+    def __init__(self,x,y):
         # Animação
         self.frames = self.carregar_frames("imagens/Sprites/ByteRightWalk.png", 2, 64, 64)
         self.frame_atual = 0
@@ -11,7 +11,7 @@ class Player:
         # Rect
         self.image = self.frames[self.frame_atual]
         self.image = pygame.transform.scale(self.image,(40,40))
-        self.rect = self.image.get_rect(center=(500, 500))
+        self.rect = self.image.get_rect(center=(x, y))
         self.velocidade = 4
 
         #Definir o atributos inicais:
@@ -91,8 +91,8 @@ class Player:
                 self.efeito = 'velocidade'
             elif tipo == 2 and pygame.time.get_ticks() - self.tempo < 5000:
                 self.efeito = 'invencibilidade'
-                
-
+            elif tipo == 3:
+                pass
 
     def desenhar(self, superficie):
         self.image = pygame.transform.scale(self.image,(40,40))
