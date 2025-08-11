@@ -17,6 +17,7 @@ class Player:
         #Definir o atributos inicais:
         self.vidas = 3
         self.efeito = None
+        self.fragmentos = 0
 
     def carregar_frames(self, caminho, total_frames, largura, altura):
         sprite_sheet = pygame.image.load(caminho).convert_alpha()
@@ -93,6 +94,8 @@ class Player:
                 self.efeito = 'invencibilidade'
             elif tipo == 3:
                 pass
+            elif tipo==4:
+                self.fragmentos +=1
 
     def desenhar(self, superficie):
         self.image = pygame.transform.scale(self.image,(40,40))

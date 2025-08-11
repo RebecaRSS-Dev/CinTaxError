@@ -135,17 +135,21 @@ class Coletavel:
         self.rect = pygame.Rect(x, y, 30, 30)
         self.tipo = tipo
         self.duracao_efeito = 0
+        self.fragmentos = 0
         #analisar qual o tipo do coletavel:
-        if (self.tipo == 1):
+        if self.tipo == 1:
             self.cor = AZUL
             self.pontos = 5
         else:
             self.duracao_efeito = 5000
-            if (self.tipo == 2):
+            if self.tipo == 2:
                 self.cor = VERDE
                 self.pontos = 0
-            elif (self.tipo == 3):
+            elif self.tipo == 3:
                 self.cor = CIANO
+                self.pontos = 0
+            elif self.tipo == 4:
+                self.cor = AMARELO
                 self.pontos = 0
         self.spritesheet = pygame.image.load("New Piskel.png").convert_alpha()
         self.frame_width = 32
@@ -229,7 +233,7 @@ class Niveis:
     # 3. CRIAR COLISÕES COM A ESCALA APLICADA
     def criar_colisoes(self):
         grupo_colisao = pygame.sprite.Group()
-        camadas_de_colisao = ['Collisions', 'Coast', 'Objects']
+        camadas_de_colisao = ['Collisions']
 
         for camada_nome in camadas_de_colisao:
             try:
@@ -260,11 +264,14 @@ class Niveis:
             except ValueError:
                 pass
         return grupo_colisao
+    #4. Criar lista dos inimigos
+    #def criar_inimigos(self):
+        
 
 # --- FIM DAS MODIFICAÇÕES PARA ESCALA ---
 
 # Inicialização dos níveis
-ObjetosNiveis ={1:Niveis('data\maps\grad1.tmx',largura_tela,altura_tela,Player(50,50),[Inimigo(700,700,2),Inimigo(350,350,1)],[Coletavel(500, 600, 1), Coletavel(300, 500, 2)]),
+ObjetosNiveis ={1:Niveis('data\maps\grad1.tmx',largura_tela,altura_tela,Player(500,500),[Inimigo(700,700,2),Inimigo(350,350,1)],[Coletavel(500, 600, 1), Coletavel(300, 500, 2),Coletavel(600, 600, 4)]),
                 2:Niveis('data\maps\grad2.tmx',largura_tela,altura_tela,Player(50,50),[Inimigo(350,350,1)],[Coletavel(300, 500, 2)])
                 #3:Niveis('data\maps\grad3.tmx',largura_tela,altura_tela,[]),
                 #4:Niveis('data\maps\grad4.tmx',largura_tela,altura_tela,[]),
@@ -274,8 +281,10 @@ fluxoDeJogo = Fluxo()
 
 nivelAtual = 1
 ObjNivel = ObjetosNiveis[nivelAtual]
-def CarregarNivel(ObjNivel):
 
+
+
+def CarregarNivel(ObjNivel):
     Coletaveis = ObjNivel.grupo_colecionaveis
 
     # Inimigos
@@ -286,27 +295,36 @@ def CarregarNivel(ObjNivel):
     grupo_colisao = pygame.sprite.Group()
     grupo_colisao.add(ObjNivel.grupo_colisao)
 
+    
+
     return grupo_colisao, Inimigos, Coletaveis, grupo_inimigos
+
+def mudarNivel(ObjNivel,nivelAtual):
+        player = ObjNivel.player
+        if player.fragmentos == 0:
+            nivelAtual=1
+        elif player.fragmentos == 1:
+            nivelAtual=2
+        elif player.fragmentos == 2:
+            nivelAtual=3
+        elif player.fragmentos == 3:
+            nivelAtual=4
+
+        return nivelAtual
 
 timeInicial = pygame.time.get_ticks()
 while True:
     if fluxoDeJogo.start:
         fluxoDeJogo.telaDeStart(screen, fluxoDeJogo.lista_de_botoes[1], fluxoDeJogo.lista_de_botoes[0], fluxoDeJogo.lista_de_botoes, fluxoDeJogo.imagem_tela_start)
+    
     if fluxoDeJogo.jogando:
         grupo_colisao, Inimigos, Coletaveis, grupo_inimigos = CarregarNivel(ObjNivel)
         fluxoDeJogo.jogo(ObjNivel.player, ObjNivel, grupo_colisao, Inimigos, Coletaveis, grupo_inimigos)
+        nivelAtual = mudarNivel(ObjNivel,nivelAtual)
+        print(nivelAtual)
     if fluxoDeJogo.derrotado:
         fluxoDeJogo.telaDeGameOver()
-    timeFinal = pygame.time.get_ticks()
-    if timeFinal - timeInicial > 5000:
-        print('oi')
-        timeInicial = pygame.time.get_ticks()
-        if nivelAtual+1 <= len(ObjetosNiveis):
-            nivelAtual+=1
-            ObjNivel = ObjetosNiveis[nivelAtual]
-        else:
-            nivelAtual=1
-            ObjNivel = ObjetosNiveis[nivelAtual]
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
