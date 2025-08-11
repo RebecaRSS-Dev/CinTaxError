@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="117">
+ <tileset firstgid="1" source="../mapas/0_setup/data/tilesets/Grass.tsx"/>
+ <tileset firstgid="4" source="../mapas/0_setup/data/tilesets/objects.tsx"/>
+ <tileset firstgid="35" source="../mapas/0_setup/data/tilesets/world.tsx"/>
+ <layer id="1" name="Terrain" width="20" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+76,0,76,76,76,76,76,76,0,3221225639,166,166,166,166,166,228,0,166,166,0,
+76,76,76,0,0,0,0,76,0,3221225639,166,166,166,166,0,228,166,166,166,0,
+76,76,0,0,76,76,76,76,0,3221225639,0,166,166,166,166,228,0,0,166,0,
+76,76,0,76,76,0,0,0,0,3221225639,166,166,0,166,166,238,166,0,166,0,
+76,76,0,76,76,76,76,76,0,3221225639,166,166,0,166,0,0,166,0,166,0,
+76,76,0,0,0,0,76,76,0,3221225639,166,166,166,166,166,166,166,0,166,0,
+76,76,76,76,76,76,76,106,0,3221225639,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,175,2684354727,2684354727,2684354727,2684354727,2684354727,2684354727,3221225628,2684354727,2684354727,0,
+2684354667,2684354667,2684354667,2684354667,2684354667,2684354667,2684354667,2684354667,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,46,46,46,46,46,2684354606,3221225579,0,76,76,76,76,76,76,76,76,76,0,
+46,46,46,0,0,46,46,46,3221225579,0,76,0,0,0,0,0,0,76,76,0,
+46,3,46,46,46,46,46,46,3221225579,0,76,0,76,76,76,76,76,76,76,0,
+46,46,3,0,46,0,46,0,105,76,76,0,76,76,76,106,0,76,76,0,
+0,46,3,0,46,46,46,46,0,76,76,76,76,0,76,106,76,76,76,0,
+3,3,3,3,0,0,46,46,3221225579,0,76,76,0,0,106,2684354651,2684354651,76,76,0,
+3,3,0,3,3,0,0,0,2684354676,0,76,76,76,106,106,2684354651,76,0,0,0,
+3,0,3,3,3,3,0,0,2684354676,0,0,76,76,106,106,106,106,76,76,0,
+3,3,0,3,3,3,3,3,2684354676,0,76,76,76,0,106,76,106,76,76,0,
+3,3,3,3,3,3,0,3,2684354676,0,76,0,76,76,106,106,106,76,76,0
+</data>
+ </layer>
+ <layer id="5" name="Terrain Top" width="20" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,228,0,229,229,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,229,229,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,228,0,229,229,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,238,0,239,239,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,1610612782,105,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,105,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2684354651,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,2684354676,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="4" name="parede2" width="20" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3221225549,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3221225549,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3221225549,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3221225549,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3221225549,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3221225549,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3221225549,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3221225549,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,
+0,0,0,0,0,0,0,0,2684354676,0,0,0,0,0,0,78,0,0,0,0,
+133,0,0,0,0,0,0,0,2684354676,0,0,0,0,0,0,78,0,0,0,0
+</data>
+ </layer>
+ <layer id="3" name="paredes" width="20" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3221225609,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+133,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+133,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+133,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+133,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+133,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+133,0,0,0,0,0,0,0,2684354676,0,0,0,0,0,0,0,0,0,0,0,
+1610612869,1610612869,1610612869,1610612869,1610612869,1610612869,1610612869,1610612869,1610612869,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Objects">
+  <object id="1" gid="6" x="46.5372" y="440.408" width="94.1851" height="132.116"/>
+  <object id="2" gid="8" x="207.686" y="543.478" width="64" height="128"/>
+  <object id="3" gid="34" x="-4.48517" y="615.171" width="43.9118" height="44.0666" rotation="359.683"/>
+  <object id="17" gid="11" x="70.6667" y="576.333" width="48" height="84"/>
+  <object id="19" gid="10" x="288" y="610.667" width="36" height="70.6667"/>
+  <object id="20" gid="34" x="212.711" y="389.967" width="43.9118" height="44.0666" rotation="359.683"/>
+  <object id="21" gid="29" x="594" y="510" width="48" height="48"/>
+  <object id="22" gid="29" x="541" y="328" width="39" height="36"/>
+  <object id="23" gid="29" x="604" y="404" width="37" height="34"/>
+  <object id="24" gid="20" x="535" y="645" width="81" height="110"/>
+  <object id="25" gid="19" x="432.333" y="584" width="66" height="96"/>
+  <object id="26" gid="25" x="392" y="406" width="122" height="108"/>
+  <object id="27" gid="29" x="381" y="545" width="32" height="33"/>
+  <object id="35" gid="1" x="354" y="606" width="34" height="35">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="37" gid="1" x="354" y="639.5" width="34" height="35">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="38" gid="1" x="391" y="606.5" width="34" height="35">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="39" gid="1" x="391" y="642.5" width="34" height="35">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="40" gid="1" x="428" y="642.5" width="34" height="35">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="41" gid="1" x="427" y="606.5" width="34" height="35">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="42" gid="29" x="480" y="634.5" width="32" height="33"/>
+  <object id="43" gid="21" x="327" y="397" width="64" height="108"/>
+  <object id="52" gid="2" x="449" y="83" width="34" height="34">
+   <properties>
+    <property name="biome" value="ice"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="54" gid="2" x="449" y="117" width="34" height="34">
+   <properties>
+    <property name="biome" value="ice"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="55" gid="2" x="391" y="259" width="34" height="34">
+   <properties>
+    <property name="biome" value="ice"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="57" gid="2" x="394" y="192" width="34" height="34">
+   <properties>
+    <property name="biome" value="ice"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="60" gid="2" x="604" y="224" width="34" height="34">
+   <properties>
+    <property name="biome" value="ice"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="61" gid="2" x="602" y="276" width="34" height="34">
+   <properties>
+    <property name="biome" value="ice"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="64" gid="19" x="25.3333" y="262.667" width="66.6667" height="85.3333"/>
+  <object id="65" gid="19" x="208" y="96" width="74.6667" height="88"/>
+  <object id="66" gid="20" x="65.6667" y="114.333" width="68" height="80"/>
+  <object id="67" gid="29" x="90" y="166" width="42.6667" height="37.3333"/>
+  <object id="68" gid="29" x="153.333" y="38.6667" width="42.6667" height="37.3333"/>
+ </objectgroup>
+ <objectgroup id="7" name="Monsters">
+  <object id="31" gid="1" x="544" y="394" width="52" height="52">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="32" gid="1" x="587" y="562" width="52" height="52">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="33" gid="1" x="574" y="457" width="52" height="52">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="34" gid="1" x="586" y="638" width="52" height="52">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="44" gid="5" x="331" y="213" width="58" height="91"/>
+  <object id="45" gid="5" x="568" y="270" width="56" height="82"/>
+  <object id="46" gid="14" x="431" y="245" width="60" height="83"/>
+  <object id="47" gid="32" x="443" y="45" width="35" height="38"/>
+  <object id="48" gid="32" x="511.5" y="249" width="35" height="38"/>
+  <object id="49" gid="32" x="349.5" y="268" width="35" height="38"/>
+  <object id="50" gid="23" x="321" y="121" width="126" height="130"/>
+  <object id="59" gid="2" x="504" y="220" width="34" height="34">
+   <properties>
+    <property name="biome" value="ice"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="63" gid="17" x="152" y="260" width="137.333" height="130.667"/>
+  <object id="69" gid="1" x="32.3333" y="159.333" width="30.6667" height="30.6667">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="70" gid="1" x="159.333" y="128.667" width="30.6667" height="30.6667">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="71" gid="1" x="156.667" y="96.6667" width="30.6667" height="30.6667">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="72" gid="1" x="128.667" y="98" width="30.6667" height="30.6667">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="73" gid="1" x="128.333" y="127.667" width="30.6667" height="30.6667">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="74" gid="1" x="33" y="128.333" width="30.6667" height="30.6667">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="75" gid="1" x="61.6667" y="31.6667" width="30.6667" height="30.6667">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+  <object id="76" gid="1" x="30.6667" y="30.6667" width="30.6667" height="30.6667">
+   <properties>
+    <property name="biome" value="forest"/>
+    <property name="level" type="int" value="10"/>
+    <property name="monsters" value="Atrox,Pouch"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="Collisions">
+  <object id="77" x="2.33332" y="0.9995" width="27.3334" height="634.001"/>
+  <object id="78" x="319.667" y="613" width="26" height="292.668" rotation="90"/>
+  <object id="79" x="513" y="291.666" width="32.6667" height="154.001"/>
+  <object id="80" x="513.667" y="515" width="32.6667" height="128.001"/>
+  <object id="81" x="643.667" y="155" width="32.6667" height="149.001" rotation="90"/>
+  <object id="82" x="486.667" y="-1.0005" width="32.6667" height="154.001"/>
+  <object id="83" x="73.6667" y="492" width="44.6667" height="82.001"/>
+  <object id="84" x="290.667" y="542" width="31.6667" height="71.001"/>
+  <object id="85" x="213.167" y="346.5" width="44.6667" height="42.001"/>
+  <object id="86" x="380.667" y="513" width="32.6667" height="34.001"/>
+  <object id="87" x="596.667" y="462" width="44.6667" height="42.001"/>
+  <object id="88" x="605.667" y="373" width="32.6667" height="28.001"/>
+  <object id="89" x="545.667" y="295" width="32.6667" height="34.001"/>
+  <object id="90" x="482.667" y="602" width="32.6667" height="34.001"/>
+  <object id="91" x="92.6667" y="130" width="38.6667" height="34.001"/>
+  <object id="92" x="350.667" y="228" width="32.6667" height="34.001"/>
+  <object id="93" x="508.333" y="213" width="32.6667" height="34.001"/>
+  <object id="94" x="156.667" y="1.9995" width="38.6667" height="34.001"/>
+  <object id="95" x="62.6667" y="402" width="52.6667" height="36.001"/>
+  <object id="96" x="211.667" y="418" width="52.6667" height="123.001"/>
+  <object id="97" x="32.6667" y="234.166" width="58.6667" height="30.3343"/>
+  <object id="98" x="71.6667" y="75.4995" width="57.6667" height="36.001"/>
+  <object id="99" x="211.667" y="57.4995" width="67.6667" height="41.001"/>
+  <object id="100" x="331" y="353.166" width="52.6667" height="39.001"/>
+  <object id="101" x="436.333" y="531.166" width="52.6667" height="39.001"/>
+  <object id="102" x="435" y="211.166" width="52.6667" height="39.001"/>
+  <object id="103" x="572.333" y="221.833" width="52.6667" height="39.001"/>
+  <object id="104" x="328.333" y="163.166" width="52.6667" height="39.001"/>
+  <object id="105" x="328.333" y="-4.83383" width="116.667" height="123.001"/>
+  <object id="106" x="155" y="131.166" width="131.333" height="128.334"/>
+  <object id="107" x="389.667" y="295.166" width="122" height="107.001"/>
+ </objectgroup>
+ <objectgroup id="10" name="Entities">
+  <object id="108" name="Player" x="456" y="457.333">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="pos" value="plant"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="110" name="Character" x="126.667" y="42.6667">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="111" name="Character" x="564" y="218.667">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="112" name="Character" x="161.333" y="497.333">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="114" name="Character" x="622.667" y="322.667">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="115" name="Player" x="301.333" y="134.667">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="pos" value="plant"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="116" name="Player" x="148" y="598.667">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="pos" value="plant"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+</map>
