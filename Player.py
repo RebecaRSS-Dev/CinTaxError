@@ -16,7 +16,7 @@ class Player:
         self.velocidade = 0.1*largura
 
         #Definir o atributos inicais:
-        self.vidas = 3
+        self.vidas = 1
         self.efeito = None
         self.fragmentos = 0
         
@@ -49,7 +49,7 @@ class Player:
             self.image = self.frames[self.frame_atual]
         elif teclas[pygame.K_DOWN]:
             movimento.y = self.velocidade
-            self.frames = self.carregar_frames("imagens/Sprites/ByteBackWalk.png", 2, 56, 56)
+            self.frames = self.carregar_frames("imagens\Sprites\ByteFrontWalk.png", 2, 355, 382)
             self.image = self.frames[self.frame_atual]
 
         if movimento.length() != 0:
@@ -73,6 +73,7 @@ class Player:
             self.frame_atual = 0
             self.image = self.frames[0]
             self.image = pygame.transform.scale(self.image,(self.largura,self.altura))
+        
 
     def coletar(self,coletaveis):
         for coletavel in coletaveis:
@@ -102,6 +103,8 @@ class Player:
             elif tipo==4:
                 self.fragmentos +=1
                 self.mudarFase = True
+
+    #def mudar_fase(self,):
 
     def desenhar(self, superficie):
         self.image = pygame.transform.scale(self.image,(self.largura,self.altura))
