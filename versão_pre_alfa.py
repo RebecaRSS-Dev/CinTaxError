@@ -271,15 +271,16 @@ class Niveis:
 # --- FIM DAS MODIFICAÇÕES PARA ESCALA ---
 
 # Inicialização dos níveis
-ObjetosNiveis ={1:Niveis('data\maps\grad1.tmx',largura_tela,altura_tela,Player(500,500),[Inimigo(700,700,2),Inimigo(350,350,1)],[Coletavel(500, 600, 1), Coletavel(300, 500, 2),Coletavel(600, 600, 4)]),
-                2:Niveis('data\maps\grad2.tmx',largura_tela,altura_tela,Player(50,50),[Inimigo(350,350,1)],[Coletavel(300, 500, 2)])
+ObjetosNiveis ={'Hub':Niveis('data\maps\Hub.tmx',largura_tela,altura_tela,Player(largura_tela/2,altura_tela-80,80,80),[],[]),
+                1:Niveis('data\maps\grad1.tmx',largura_tela,altura_tela,Player(500,500,40,40),[Inimigo(700,700,2),Inimigo(350,350,1)],[Coletavel(500, 600, 1), Coletavel(300, 500, 2),Coletavel(600, 600, 4)]),
+                2:Niveis('data\maps\grad2.tmx',largura_tela,altura_tela,Player(300,500,40,40),[Inimigo(350,350,1)],[Coletavel(300, 500, 4)])
                 #3:Niveis('data\maps\grad3.tmx',largura_tela,altura_tela,[]),
                 #4:Niveis('data\maps\grad4.tmx',largura_tela,altura_tela,[]),
 }
 
 fluxoDeJogo = Fluxo()
 
-nivelAtual = 1
+nivelAtual = 2
 ObjNivel = ObjetosNiveis[nivelAtual]
 
 
@@ -299,32 +300,31 @@ def CarregarNivel(ObjNivel):
 
     return grupo_colisao, Inimigos, Coletaveis, grupo_inimigos
 
-def mudarNivel(ObjNivel,nivelAtual):
-        player = ObjNivel.player
-        if player.fragmentos == 0:
-            nivelAtual=1
-        elif player.fragmentos == 1:
-            nivelAtual=2
-        elif player.fragmentos == 2:
-            nivelAtual=3
-        elif player.fragmentos == 3:
-            nivelAtual=4
+def irParaHub():
+    global ObjNivel
+    global nivelAtual
+    if ObjNivel.player.mudarFase:
+        nivelAtual = 'Hub'
+        ObjNivel.player.mudarFase = False
+    ObjNivel = ObjetosNiveis[nivelAtual]
 
-        return nivelAtual
-
-timeInicial = pygame.time.get_ticks()
 while True:
     if fluxoDeJogo.start:
         fluxoDeJogo.telaDeStart(screen, fluxoDeJogo.lista_de_botoes[1], fluxoDeJogo.lista_de_botoes[0], fluxoDeJogo.lista_de_botoes, fluxoDeJogo.imagem_tela_start)
     
     if fluxoDeJogo.jogando:
-        grupo_colisao, Inimigos, Coletaveis, grupo_inimigos = CarregarNivel(ObjNivel)
+        grupo_colisao, Inimigos, Coletaveis, grupo_inimigos = CarregarNivel(ObjNivel)    
         fluxoDeJogo.jogo(ObjNivel.player, ObjNivel, grupo_colisao, Inimigos, Coletaveis, grupo_inimigos)
-        nivelAtual = mudarNivel(ObjNivel,nivelAtual)
+        irParaHub()
         print(nivelAtual)
+        if nivelAtual=='Hub':
+            retanguloTest = pygame.rect.Rect(420, 675, 105, 80)
+            pygame.draw.rect(screen, (0, 255, 0), retanguloTest)
+    
     if fluxoDeJogo.derrotado:
         fluxoDeJogo.telaDeGameOver()
 
+    #print(pygame.mouse.get_pos())
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
