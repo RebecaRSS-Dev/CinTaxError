@@ -1,23 +1,28 @@
 import pygame
 
 class Player:
-    def __init__(self,x,y):
+    def __init__(self,x,y,largura,altura):
         # Animação
         self.frames = self.carregar_frames("imagens/Sprites/ByteRightWalk.png", 2, 64, 64)
         self.frame_atual = 0
         self.tempo_animacao = pygame.time.get_ticks()
         self.velocidade_animacao = 120  # ms entre frames
-
+        self.largura = largura
+        self.altura = altura
         # Rect
         self.image = self.frames[self.frame_atual]
-        self.image = pygame.transform.scale(self.image,(40,40))
+        self.image = pygame.transform.scale(self.image,(largura,altura))
         self.rect = self.image.get_rect(center=(x, y))
-        self.velocidade = 4
+        self.velocidade = 0.1*largura
 
         #Definir o atributos inicais:
         self.vidas = 3
         self.efeito = None
         self.fragmentos = 0
+        
+        #Booleano de mudar de fase
+        self.mudarFase = False
+
 
     def carregar_frames(self, caminho, total_frames, largura, altura):
         sprite_sheet = pygame.image.load(caminho).convert_alpha()
@@ -62,12 +67,12 @@ class Player:
                 self.tempo_animacao = agora
                 self.frame_atual = (self.frame_atual + 1) % len(self.frames)
                 self.image = self.frames[self.frame_atual]
-                self.image = pygame.transform.scale(self.image,(40,40))
+                self.image = pygame.transform.scale(self.image,(self.largura,self.altura))
         else:
             # Parado = primeiro frame
             self.frame_atual = 0
             self.image = self.frames[0]
-            self.image = pygame.transform.scale(self.image,(40,40))
+            self.image = pygame.transform.scale(self.image,(self.largura,self.altura))
 
     def coletar(self,coletaveis):
         for coletavel in coletaveis:
@@ -96,9 +101,10 @@ class Player:
                 pass
             elif tipo==4:
                 self.fragmentos +=1
+                self.mudarFase = True
 
     def desenhar(self, superficie):
-        self.image = pygame.transform.scale(self.image,(40,40))
+        self.image = pygame.transform.scale(self.image,(self.largura,self.altura))
         if self.efeito == 'invencibilidade':
             imagem_fantasma = self.image.copy()
             imagem_fantasma.set_alpha(128)
