@@ -112,13 +112,13 @@ class Fluxo:
                     self.rodando = False
                     pygame.quit()
                 if self.botao_restart.rect.collidepoint(posicao_mouse):
-                    print("Reiniciando jogo...")
-                    global nivelAtual, ObjNivel
+                    global nivelAtual, ObjNivel, ObjetosNiveis
+                    ObjetosNiveis = criar_niveis()
                     nivelAtual = 1
                     ObjNivel = ObjetosNiveis[nivelAtual]
-                    ObjNivel.player.vidas = 3
                     self.jogando = True
                     self.derrotado = False
+
 
         screen.blit(self.imagem_tela_gameover, (0, 0))
         for botao in self.botoes_gameover:
@@ -298,18 +298,28 @@ class Niveis:
 
 # --- FIM DAS MODIFICAÇÕES PARA ESCALA ---
 
-# Inicialização dos níveis
-ObjetosNiveis ={'Hub':Niveis('data\maps\Hub.tmx',largura_tela,altura_tela,Player(largura_tela/2,altura_tela-80,80,80),[],[]),
-                1:Niveis('data\maps\grad1.tmx',largura_tela,altura_tela,Player(500,500,40,40),[Inimigo(700,700,2),Inimigo(350,350,1)],[Coletavel(500, 600, 1), Coletavel(300, 500, 2),Coletavel(600, 600, 4)]),
-                2:Niveis('data\maps\grad2.tmx',largura_tela,altura_tela,Player(300,500,40,40),[Inimigo(350,350,1)],[Coletavel(300, 500, 4)])
-                #3:Niveis('data\maps\grad3.tmx',largura_tela,altura_tela,[]),
-                #4:Niveis('data\maps\grad4.tmx',largura_tela,altura_tela,[]),
-}
+
+def criar_niveis():
+    return {
+        'Hub': Niveis('data/maps/Hub.tmx', largura_tela, altura_tela,
+                      Player(largura_tela/2, altura_tela-80, 80, 80), [], []),
+        1: Niveis('data/maps/grad1.tmx', largura_tela, altura_tela,
+                  Player(500, 500, 40, 40),
+                  [Inimigo(700, 700, 2), Inimigo(800, 800, 1)],
+                  [Coletavel(500, 600, 1), Coletavel(300, 500, 2), Coletavel(600, 600, 4)]),
+        2: Niveis('data/maps/grad2.tmx', largura_tela, altura_tela,
+                  Player(200, 500, 40, 40),
+                  [Inimigo(350, 350, 1)],
+                  [Coletavel(300, 500, 4)])
+    }
+
+
+
 
 fluxoDeJogo = Fluxo()
 
+ObjetosNiveis = criar_niveis()
 nivelAtual = 1
-
 ObjNivel = ObjetosNiveis[nivelAtual]
 
 
@@ -338,14 +348,14 @@ def irParaHub():
     ObjNivel = ObjetosNiveis[nivelAtual]
 
 while True:
+    
     if fluxoDeJogo.start:
         fluxoDeJogo.telaDeStart(screen, fluxoDeJogo.lista_de_botoes[1], fluxoDeJogo.lista_de_botoes[0], fluxoDeJogo.lista_de_botoes, fluxoDeJogo.imagem_tela_start)
     
     if fluxoDeJogo.jogando:
-        grupo_colisao, Inimigos, Coletaveis, grupo_inimigos = CarregarNivel(ObjNivel)    
+        grupo_colisao, Inimigos, Coletaveis, grupo_inimigos = CarregarNivel(ObjNivel)
         fluxoDeJogo.jogo(ObjNivel.player, ObjNivel, grupo_colisao, Inimigos, Coletaveis, grupo_inimigos)
         irParaHub()
-        print(ObjNivel.player.vidas)
         if ObjNivel.player.vidas<=0:
             fluxoDeJogo.jogando = False
             fluxoDeJogo.derrotado = True

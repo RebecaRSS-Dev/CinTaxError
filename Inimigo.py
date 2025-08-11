@@ -1,4 +1,5 @@
 import pygame
+import math
 
 def carregar_frames(sprite_sheet_path, num_frames, frame_width, frame_height):
     sheet = pygame.image.load(sprite_sheet_path).convert_alpha()
@@ -23,7 +24,7 @@ class Inimigo(pygame.sprite.Sprite):
         self.rect.center = (x, y)
 
         # Hitbox menor
-        hitbox_width, hitbox_height = 50, 80
+        hitbox_width, hitbox_height = 20, 50
         self.hitbox = pygame.Rect(0, 0, hitbox_width, hitbox_height)
         self.hitbox.center = self.rect.center
 
@@ -65,17 +66,39 @@ class Inimigo(pygame.sprite.Sprite):
                     self.rect = newPosition
 
     def perseguir(self, player, paredes, inimigos):
-        selfVector = pygame.Vector2(self.rect.center)
-        vetorNormalizedPlayer = pygame.Vector2(player.rect.center)
-        moviment = (vetorNormalizedPlayer - selfVector).normalize() * 4
-        newPosition = self.rect.move(moviment)
-        newHitbox = self.hitbox.copy()
-        newHitbox.center = newPosition.center
+        self_pos = pygame.Vector2(self.rect.center)
+        player_pos = pygame.Vector2(player.rect.center)
 
-        if not any(newHitbox.colliderect(p.rect) for p in paredes) and not newHitbox.colliderect(player.rect) and not any(newHitbox.colliderect(i.hitbox) for i in inimigos if i != self):
-            self.rect = newPosition
-        
-        if newHitbox.colliderect(player.rect) and player.efeito==None:
+        # Direção principal (reto para o player)
+        direcao_principal = (player_pos - self_pos)
+        if direcao_principal.length_squared() == 0:
+            return  # já está no mesmo lugar
+        direcao_principal = direcao_principal.normalize()
+
+        velocidade = 2.5
+
+        # Lista de direções a tentar (principal, levemente à esquerda, levemente à direita, etc.)
+        angulos = [0, 25, -25, 45, -45, 65, -65, 90, -90]  # graus
+        direcoes_teste = []
+        for ang in angulos:
+            rad = math.radians(ang)
+            rotacionada = direcao_principal.rotate_rad(rad)
+            direcoes_teste.append(rotacionada)
+
+        # Testa cada direção e pega a primeira que não colida
+        for direcao in direcoes_teste:
+            moviment = direcao * velocidade
+            new_position = self.rect.move(moviment)
+            new_hitbox = self.hitbox.copy()
+            new_hitbox.center = new_position.center
+
+            if (not any(new_hitbox.colliderect(p.rect) for p in paredes) and
+                not any(new_hitbox.colliderect(i.hitbox) for i in inimigos if i != self)):
+                self.rect = new_position
+                break  # achou caminho válido
+
+        # Checa colisão com o player
+        if self.hitbox.colliderect(player.rect) and player.efeito is None:
             player.vidas -= 1
             player.efeito = 'invencibilidade'
             player.tempo = pygame.time.get_ticks()
@@ -102,7 +125,7 @@ class Inimigo(pygame.sprite.Sprite):
             self.image = self.frames[0]
 
     def draw(self, surface):
-        self.image = pygame.transform.scale(self.image,(80,80))
+        self.image = pygame.transform.scale(self.image,(50,50))
         pos_x = self.rect.centerx - self.image.get_width() // 2
         pos_y = self.rect.centery - self.image.get_height() // 2
         surface.blit(self.image, (pos_x, pos_y))
