@@ -5,7 +5,7 @@ from Player import Player
 pygame.init()
 
 #Configuração Geral
-screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((1366, 768))
 
 largura_tela, altura_tela = screen.get_size()
 
@@ -30,6 +30,7 @@ class Obstacle(pygame.sprite.Sprite):
 #Classe coletaveis:
 class Coletavel:
     def __init__(self, x, y, tipo):
+        super().__init__()
         self.rect = pygame.Rect(x, y, 30, 30)
         self.tipo = tipo
         self.duracao_efeito = 0
@@ -79,7 +80,7 @@ class Coletavel:
 
 # --- INÍCIO DAS MODIFICAÇÕES PARA ESCALA ---
 class Niveis:
-    def __init__(self,arquivo_tmx, largura_tela, altura_tela):
+    def __init__(self,arquivo_tmx, largura_tela, altura_tela,inimigos,colecionaveis):
         self.mapa_tiled = pytmx.load_pygame(arquivo_tmx)
 
         # 1. CALCULAR FATOR DE ESCALA
@@ -97,7 +98,11 @@ class Niveis:
         # Cache para armazenar imagens já redimensionadas e evitar trabalho repetido
         self.cache_tiles = {}
 
+        #Criar os Grupos
         self.grupo_colisao = self.criar_colisoes()
+        self.grupo_inimigos = inimigos
+        self.grupo_colecionaveis = colecionaveis
+        
 
     def desenhar_mapa(self,surface):
         for camada in self.mapa_tiled.visible_layers:
@@ -156,17 +161,26 @@ class Niveis:
 
 # --- FIM DAS MODIFICAÇÕES PARA ESCALA ---
 
-NivelAtual = Niveis('data\maps\grad1.tmx',largura_tela,altura_tela)
+# Inicialização dos níveis
+ObjetosNiveis ={1:Niveis('data\maps\grad1.tmx',largura_tela,altura_tela,[Inimigo(700,700,2),Inimigo(350,350,1)],[Coletavel(500, 600, 1), Coletavel(300, 500, 2)]),
+                2:Niveis('data\maps\grad2.tmx',largura_tela,altura_tela,[],[])
+                #3:Niveis('data\maps\grad3.tmx',largura_tela,altura_tela,[]),
+                #4:Niveis('data\maps\grad4.tmx',largura_tela,altura_tela,[]),
+}
+
+NivelAtual = ObjetosNiveis[1]
 
 player = Player()
 
 paredes = []
 
-Coletaveis = [Coletavel(50,50,1)]
+Coletaveis = NivelAtual.grupo_colecionaveis
 
-Inimigos = [Inimigo(700,700,2),Inimigo(350,350,1)]
+# Inimigos
+Inimigos = NivelAtual.grupo_inimigos
 grupo_inimigos = pygame.sprite.Group()
 grupo_inimigos.add(Inimigos)
+
 grupo_colisao = pygame.sprite.Group()
 grupo_colisao.add(NivelAtual.grupo_colisao)
 
@@ -176,8 +190,13 @@ while True:
     screen.fill(PRETO)
     NivelAtual.desenhar_mapa(screen)
     player.desenhar(screen)
-    Coletaveis[0].update()
-    Coletaveis[0].desenhar(screen)
+    player.efeitos(Coletaveis)
+    print(player.vidas)
+    print(player.efeito)
+    for coletavel in Coletaveis:
+        coletavel.update()
+        coletavel.desenhar(screen)
+        pygame.draw.rect(screen, coletavel.cor, coletavel.rect,2)
 
     for inimigo in Inimigos:
         inimigo.move(player,grupo_colisao,Inimigos)
@@ -188,7 +207,7 @@ while True:
     grupo_colisao.draw(screen)
     for inim in grupo_inimigos:
         pygame.draw.rect(screen, (0, 255, 0), inim.hitbox, 2)
-        pygame.draw.rect(screen, (255, 255, 0), inim.rect, 2)  # verde, linha 2 px
+        pygame.draw.rect(screen, (255, 255, 0), inim.rect, 2)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -198,5 +217,5 @@ while True:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 exit()
-    pygame.display.flip()
+    #pygame.display.flip()
     pygame.time.Clock().tick(60)

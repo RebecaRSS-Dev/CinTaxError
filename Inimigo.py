@@ -74,6 +74,11 @@ class Inimigo(pygame.sprite.Sprite):
 
         if not any(newHitbox.colliderect(p.rect) for p in paredes) and not newHitbox.colliderect(player.rect) and not any(newHitbox.colliderect(i.hitbox) for i in inimigos if i != self):
             self.rect = newPosition
+        
+        if newHitbox.colliderect(player.rect) and player.efeito==None:
+            player.vidas -= 1
+            player.efeito = 'invencibilidade'
+            player.tempo = pygame.time.get_ticks()
 
     def move(self, player, paredes, inimigos):
         newHitbox = self.hitbox
