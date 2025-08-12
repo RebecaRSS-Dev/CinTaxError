@@ -1,6 +1,7 @@
 import pygame
 
 class Player:
+    pontuacao = 0
     def __init__(self,x,y,largura,altura):
         # Animação
         self.frames = self.carregar_frames("imagens/Sprites/ByteRightWalk.png", 2, 64, 64)
@@ -19,7 +20,9 @@ class Player:
         self.vidas = 1
         self.efeito = None
         self.fragmentos = 0
-        self.pontos = 0
+        self.pontuacao = 0
+
+        pontuacao = self.pontuacao
         
         #Booleano de mudar de fase
         self.mudarFase = False
@@ -94,13 +97,15 @@ class Player:
                 if pygame.time.get_ticks() - self.tempo > 5000:
                     self.efeito = None
         else:
-            if tipo == 1 and pygame.time.get_ticks() - self.tempo < 5000:
-                self.pontos += pontos
-            elif tipo == 2 and pygame.time.get_ticks() - self.tempo < 5000:
+            if tipo == 1:
+                self.pontuacao += pontos
+            elif tipo == 2:
                 self.efeito = 'invencibilidade'
+                self.pontuacao += pontos
             elif tipo == 3:
                 self.velocidade = 6
                 self.efeito = 'velocidade'
+                self.pontuacao += pontos
             elif tipo==4:
                 self.fragmentos +=1
                 self.mudarFase = True

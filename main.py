@@ -21,7 +21,7 @@ BRANCO = (255, 255, 255)
 
 #Fontes:
 fonte_pequena = pygame.font.Font('ari-w9500-bold.ttf', 20)
-fonte_pequena = pygame.font.Font('ari-w9500-bold.ttf', 36)
+fonte_grande = pygame.font.Font('ari-w9500-bold.ttf', 36)
 
 #classe botão
 class Botao:
@@ -178,10 +178,10 @@ class Coletavel:
             self.duracao_efeito = 5000
             if self.tipo == 2:
                 self.cor = VERDE
-                self.pontos = 0
+                self.pontos = 1
             elif self.tipo == 3:
                 self.cor = CIANO
-                self.pontos = 0
+                self.pontos = 1
             elif self.tipo == 4:
                 self.cor = AMARELO
                 self.pontos = 0
@@ -362,9 +362,9 @@ class Niveis:
 def criar_niveis():
     return {
         #'Hub': Niveis('mapas prontos\entrada.tmx', largura_tela, altura_tela),
-        1: Niveis('mapas prontos\sala1.tmx', largura_tela, altura_tela), 
-        2: Niveis('mapas prontos\sala2.tmx', largura_tela, altura_tela),
-        3: Niveis('mapas prontos\sala3.tmx', largura_tela, altura_tela)
+        1: Niveis('mapas prontos/sala1.tmx', largura_tela, altura_tela), 
+        2: Niveis('mapas prontos/sala2.tmx', largura_tela, altura_tela),
+        3: Niveis('mapas prontos/sala3.tmx', largura_tela, altura_tela)
     }
 
 
@@ -428,5 +428,13 @@ while True:
     
     
     
+    # Desenha a pontuação na tela
+
+    if fluxoDeJogo.start == False and fluxoDeJogo.jogando == True:
+        texto_pontuacao = fonte_grande.render(f"Pontos: {ObjNivel.player.pontuacao}", True, BRANCO)
+        screen.blit(texto_pontuacao, (10, 10))
+
     pygame.display.flip()
     pygame.time.Clock().tick(60)
+
+pygame.quit
