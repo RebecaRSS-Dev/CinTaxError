@@ -17,16 +17,13 @@ class Player:
         self.velocidade = 0.1*largura
 
         #Definir o atributos inicais:
-        self.vidas = 1
+        self.vidas = 3
         self.efeito = None
         self.fragmentos = 0
         self.pontuacao = 0
-
-        pontuacao = self.pontuacao
         
         #Booleano de mudar de fase
         self.mudarFase = False
-
 
     def carregar_frames(self, caminho, total_frames, largura, altura):
         sprite_sheet = pygame.image.load(caminho).convert_alpha()
@@ -58,14 +55,12 @@ class Player:
 
         if movimento.length() != 0:
             movimento = movimento.normalize() * self.velocidade
-
             novo_rect = self.rect.move(movimento)
 
             if (not any(novo_rect.colliderect(p.rect) for p in paredes) and
                 not any(novo_rect.colliderect(i.hitbox) for i in inimigos)):
                 self.rect = novo_rect
 
-            # Atualizar frame se estiver se movendo
             agora = pygame.time.get_ticks()
             if agora - self.tempo_animacao > self.velocidade_animacao:
                 self.tempo_animacao = agora
@@ -73,11 +68,9 @@ class Player:
                 self.image = self.frames[self.frame_atual]
                 self.image = pygame.transform.scale(self.image,(self.largura,self.altura))
         else:
-            # Parado = primeiro frame
             self.frame_atual = 0
             self.image = self.frames[0]
             self.image = pygame.transform.scale(self.image,(self.largura,self.altura))
-        
 
     def coletar(self,coletaveis):
         for coletavel in coletaveis:
@@ -95,6 +88,7 @@ class Player:
                     self.efeito = None
             elif self.efeito=='invencibilidade':
                 if pygame.time.get_ticks() - self.tempo > 5000:
+                    self.velocidade = 4
                     self.efeito = None
         else:
             if tipo == 1:

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="97">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="108">
  <tileset firstgid="1" name="pixel-cyberpunk-interior" tilewidth="32" tileheight="32" tilecount="231" columns="21">
   <image source="../graphics/tilesets/grades.png" width="672" height="352"/>
  </tileset>
@@ -25,7 +25,7 @@
 45,46,47,47,64,65,66,67,68,47,46,43,43,43,64,43,44,45,64,43,
 45,46,47,68,64,65,284,67,68,68,43,44,45,46,47,47,47,47,64,43,
 46,47,47,47,65,64,284,66,43,44,45,46,47,47,68,68,68,68,64,284,
-67,68,47,284,284,284,284,43,43,43,43,44,45,46,47,47,64,65,64,43,
+284,284,284,284,284,284,284,43,43,43,43,44,45,46,47,47,64,65,64,43,
 67,68,47,43,43,64,64,64,64,284,284,284,284,284,284,284,43,44,64,64,
 67,68,47,64,64,65,66,67,68,284,284,284,284,64,64,64,43,44,64,65,
 3,68,47,65,64,284,65,66,43,46,47,284,284,65,66,67,64,65,64,65,
@@ -49,7 +49,7 @@
 131,0,87,87,87,87,87,87,0,0,0,0,0,0,0,0,0,0,0,3221225603,
 131,0,0,0,0,0,131,0,0,0,0,0,0,0,0,0,0,0,0,3221225603,
 131,0,0,0,0,0,131,0,0,0,0,0,0,0,0,0,0,0,0,3221225603,
-131,0,0,87,87,87,87,0,0,0,0,0,0,0,0,0,0,0,0,3221225603,
+87,87,87,87,87,87,87,0,0,0,0,0,0,0,0,0,0,0,0,3221225603,
 131,0,0,0,0,0,0,0,0,3221225599,2684354691,2684354691,3221225603,87,87,87,0,0,0,3221225603,
 131,0,0,0,0,0,0,0,0,109,87,88,3221225603,0,0,0,0,0,0,3221225603,
 0,3,4,5,5,127,0,0,0,0,0,131,3221225603,0,0,0,0,0,0,3221225603,
@@ -68,7 +68,7 @@
 0,0,47,3221225559,3221225559,3221225559,3221225559,109,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,68,0,0,0,0,3221225603,0,0,127,0,0,0,0,0,0,0,0,0,
 0,0,0,0,80,57,144,3221225603,0,0,127,0,0,0,0,0,0,0,0,0,
-0,0,3221225599,0,0,0,0,3221225603,0,0,127,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,3221225603,0,0,127,0,0,0,0,0,0,0,0,0,
 0,0,3221225599,0,0,0,0,3221225603,0,0,127,0,0,0,0,0,0,0,0,2684354719,
 0,0,3221225599,0,0,0,0,3221225603,0,0,0,0,0,0,0,0,0,0,0,1610612894,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,106,1610612894,
@@ -111,10 +111,10 @@
  <objectgroup id="7" name="Collisions">
   <object id="69" x="0" y="-4.5" width="641" height="68"/>
   <object id="70" x="-2" y="-5.5" width="8" height="641"/>
-  <object id="71" x="96.3333" y="95.5833" width="137.667" height="64.5834"/>
+  <object id="71" x="96.3333" y="98.0833" width="137.667" height="62.0834"/>
   <object id="72" x="233.667" y="113.833" width="23" height="46"/>
   <object id="73" x="132" y="154.833" width="90" height="18"/>
-  <object id="74" x="64.3333" y="191" width="10" height="96"/>
+  <object id="74" x="64.3333" y="224.5" width="10" height="62.5"/>
   <object id="75" x="72.2273" y="276.667" width="176.273" height="10.5"/>
   <object id="76" x="247.5" y="155.333" width="9" height="132.167"/>
   <object id="77" x="6.33333" y="604.5" width="634" height="32"/>
@@ -127,7 +127,7 @@
   <object id="84" x="599" y="306.5" width="42.6667" height="56"/>
   <object id="85" x="632.333" y="362.5" width="8.66667" height="114"/>
   <object id="86" x="192.667" y="287.5" width="31.3333" height="95.3333"/>
-  <object id="87" x="97" y="349.166" width="96" height="33.3333"/>
+  <object id="87" x="8" y="349.166" width="185" height="33.3333"/>
   <object id="88" x="319.333" y="126.833" width="32" height="128.667"/>
   <object id="89" x="451.667" y="223.167" width="59.3333" height="17.3333"/>
   <object id="90" x="453" y="127.833" width="57.3333" height="16.6667"/>
@@ -138,10 +138,77 @@
   <object id="95" x="136.25" y="510.75" width="45" height="11.75"/>
   <object id="96" x="418.75" y="61.25" width="215.25" height="12.0833"/>
  </objectgroup>
- <objectgroup id="8" name="Boss"/>
- <objectgroup id="10" name="Coletaveis"/>
+ <objectgroup id="8" name="Boss">
+  <object id="98" name="Player" x="227" y="449">
+   <point/>
+  </object>
+  <object id="100" name="Player" x="485" y="308">
+   <point/>
+  </object>
+  <object id="107" name="Player" x="589" y="431">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="10" name="Coletaveis">
+  <object id="97" name="invencibilidade" x="214" y="565">
+   <point/>
+  </object>
+  <object id="101" name="fragmento" x="150" y="242">
+   <point/>
+  </object>
+  <object id="102" name="velocidade" x="390" y="348">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="103" name="velocidade" x="598" y="126">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="104" name="pontos" x="268" y="343">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="105" name="pontos" x="544" y="352">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="106" name="pontos" x="603" y="587">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="11" name="player_start">
-  <object id="53" name="player_start" x="377" y="343">
+  <object id="53" name="player_start" x="83" y="580.333">
    <point/>
   </object>
  </objectgroup>

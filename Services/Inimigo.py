@@ -97,7 +97,7 @@ class Inimigo(pygame.sprite.Sprite):
                 break  # movimento válido encontrado
 
             # Verifique se o inimigo está colidindo com o player agora (mesmo sem mover)
-            if new_hitbox.colliderect(player.rect) and player.efeito is None:
+            if new_hitbox.colliderect(player.rect) and player.efeito != 'invencibilidade':
                 player.vidas -= 1
                 player.efeito = 'invencibilidade'
                 player.tempo = pygame.time.get_ticks()
