@@ -191,8 +191,6 @@ while True:
                 pygame.quit()
                 exit()
     
-    
-    
     # Desenha a pontuação na tela
 
     if fluxoDeJogo.start == False and fluxoDeJogo.jogando == True:
