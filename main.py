@@ -306,7 +306,7 @@ def criar_niveis():
         1: Niveis('data/maps/grad1.tmx', largura_tela, altura_tela,
                   Player(500, 500, 40, 40),
                   [Inimigo(700, 700, 2), Inimigo(800, 800, 1)],
-                  [Coletavel(500, 600, 1), Coletavel(300, 500, 2), Coletavel(600, 600, 4)]),
+                  [Coletavel(800, 700, 1), Coletavel(800, 200, 2), Coletavel(600, 600, 4)]),
         2: Niveis('data/maps/grad2.tmx', largura_tela, altura_tela,
                   Player(200, 500, 40, 40),
                   [Inimigo(350, 350, 1)],
