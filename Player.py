@@ -50,7 +50,7 @@ class Player:
             self.image = self.frames[self.frame_atual]
         elif teclas[pygame.K_DOWN]:
             movimento.y = self.velocidade
-            self.frames = self.carregar_frames("imagens\Sprites\ByteFrontWalk.png", 2, 355, 382)
+            self.frames = self.carregar_frames("imagens/Sprites/ByteFrontWalk.png", 2, 355, 382)
             self.image = self.frames[self.frame_atual]
 
         if movimento.length() != 0:
