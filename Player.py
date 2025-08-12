@@ -81,7 +81,7 @@ class Player:
 
     def coletar(self,coletaveis):
         for coletavel in coletaveis:
-            if self.rect.colliderect(coletavel.rect) and self.efeito==None:
+            if self.rect.colliderect(coletavel.rect):
                 self.tempo = pygame.time.get_ticks()
                 coletaveis.remove(coletavel)
                 return coletavel.tipo, coletavel.pontos
@@ -98,8 +98,8 @@ class Player:
                     self.efeito = None
         else:
             if tipo == 1:
-                self.pontuacao += pontos
-            elif tipo == 2:
+                self.pontos += pontos
+            elif tipo == 2 and pygame.time.get_ticks() - self.tempo < 5000:
                 self.efeito = 'invencibilidade'
                 self.pontuacao += pontos
             elif tipo == 3:

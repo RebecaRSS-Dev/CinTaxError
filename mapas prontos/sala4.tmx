@@ -160,7 +160,7 @@
   </object>
  </objectgroup>
  <objectgroup id="11" name="Coletaveis">
-  <object id="105" name="pontos" x="97.3333" y="616">
+  <object id="105" name="pontos" x="97.3333" y="603">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="o5"/>
@@ -222,7 +222,7 @@
   </object>
  </objectgroup>
  <objectgroup id="9" name="player_start">
-  <object id="58" name="player_start" x="348.667" y="620">
+  <object id="58" name="player_start" x="348.667" y="597">
    <point/>
   </object>
  </objectgroup>
