@@ -12,17 +12,6 @@ class Coletavel:
         if self.tipo == 1:
             self.cor = Cores.AZUL
             self.pontos = 5
-
-            self.spritesheet = pygame.image.load("./imagens/Sprites/New Piskel.png").convert_alpha()
-            self.frame_width = 32
-            self.frame_height = 32
-            self.columns = 3
-            self.rows = 4
-            self.animation_speed = 0.15
-            self.frame_timer = 0
-            self.frames = self.load_frames()
-            self.current_frame = 0
-            self.image = self.frames[self.current_frame]
         else:
             self.duracao_efeito = 5000
             if self.tipo == 2:
@@ -34,7 +23,16 @@ class Coletavel:
             elif self.tipo == 4:
                 self.cor = Cores.AMARELO
                 self.pontos = 0
-                
+        self.spritesheet = pygame.image.load("./imagens/Sprites/New Piskel.png").convert_alpha()
+        self.frame_width = 32
+        self.frame_height = 32
+        self.columns = 3
+        self.rows = 4
+        self.animation_speed = 0.15
+        self.frame_timer = 0
+        self.frames = self.load_frames()
+        self.current_frame = 0
+        self.image = self.frames[self.current_frame]
 
     def load_frames(self):
         frames = []
