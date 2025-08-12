@@ -362,8 +362,9 @@ class Niveis:
 def criar_niveis():
     return {
         #'Hub': Niveis('mapas prontos\entrada.tmx', largura_tela, altura_tela),
-        1: Niveis('mapas prontos\sala1.tmx', largura_tela, altura_tela)
-        #2: Niveis('mapas prontos\sala2.tmx', largura_tela, altura_tela)
+        1: Niveis('mapas prontos\sala1.tmx', largura_tela, altura_tela), 
+        2: Niveis('mapas prontos\sala2.tmx', largura_tela, altura_tela),
+        3: Niveis('mapas prontos\sala3.tmx', largura_tela, altura_tela)
     }
 
 
@@ -372,7 +373,7 @@ def criar_niveis():
 fluxoDeJogo = Fluxo()
 
 ObjetosNiveis = criar_niveis()
-nivelAtual = 1
+nivelAtual = 3
 ObjNivel = ObjetosNiveis[nivelAtual]
 
 

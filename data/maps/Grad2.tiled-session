@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala1.tmx",
+    "activeFile": "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala3.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos os Ficheiros (*)",
@@ -17,11 +17,15 @@
             "scaleInEditor": 1
         },
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala1.tmx": {
-            "scale": 1,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                11,
+                7
+            ],
+            "scale": 1.5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 339,
-                "y": 355
+                "x": 320,
+                "y": 320.3333333333333
             }
         },
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala1.tmx#neo_zero_buildings_02": {
@@ -38,17 +42,28 @@
         },
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala2.tmx": {
             "expandedObjectLayers": [
+                6,
                 9,
-                7,
                 8,
-                6
+                7
             ],
             "scale": 1,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 424,
-                "y": 438
+                "x": 320,
+                "y": 320.5
             }
+        },
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala3.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 321,
+                "y": 336
+            }
+        },
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala3.tmx#grades": {
+            "scaleInDock": 1
         },
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/pixel-cyberpunk-interior.tsx": {
             "scaleInDock": 1
@@ -69,14 +84,16 @@
         "grad2.tmx",
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/graphics/tilesets/pixel-cyberpunk-interior.tsx",
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala1.tmx",
-        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala2.tmx"
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala2.tmx",
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala3.tmx"
     ],
     "project": "Grad2.tiled-project",
     "recentFiles": [
         "grad2.tmx",
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/graphics/tilesets/pixel-cyberpunk-interior.tsx",
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala1.tmx",
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala2.tmx",
-        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala1.tmx"
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala3.tmx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }

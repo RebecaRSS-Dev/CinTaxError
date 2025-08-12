@@ -97,7 +97,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="5" name="Collision">
+ <objectgroup id="5" name="Collisions">
   <object id="1" x="0.333317" y="216.5" width="166" height="104.334"/>
   <object id="2" x="348.667" y="121.833" width="291" height="74.001"/>
   <object id="3" x="182.667" y="472.5" width="272.333" height="89.3343"/>
@@ -121,7 +121,7 @@
   <object id="22" x="1.66665" y="547.5" width="58.6667" height="19.001"/>
  </objectgroup>
  <objectgroup id="6" name="Boss">
-  <object id="23" name="Player" x="458" y="114">
+  <object id="23" name="Player" x="458" y="103.333">
    <properties>
     <property name="direction" value="down"/>
     <property name="pos" value="plant"/>
