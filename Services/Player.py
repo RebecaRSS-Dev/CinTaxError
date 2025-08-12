@@ -98,7 +98,7 @@ class Player:
                     self.efeito = None
         else:
             if tipo == 1:
-                self.pontos += pontos
+                self.pontuacao += pontos
             elif tipo == 2 and pygame.time.get_ticks() - self.tempo < 5000:
                 self.efeito = 'invencibilidade'
                 self.pontuacao += pontos
@@ -110,7 +110,6 @@ class Player:
                 self.fragmentos +=1
                 self.mudarFase = True
 
-    #def mudar_fase(self,):
 
     def desenhar(self, superficie):
         self.image = pygame.transform.scale(self.image,(self.largura,self.altura))
