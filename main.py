@@ -12,8 +12,8 @@ screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 largura_tela, altura_tela = screen.get_size()
 
 #Fontes:
-fonte_pequena = pygame.font.Font('ari-w9500-bold.ttf', 20)
-fonte_grande = pygame.font.Font('ari-w9500-bold.ttf', 36)
+fonte_pequena = pygame.font.Font('./ari-w9500-bold.ttf', 20)
+fonte_grande = pygame.font.Font('./ari-w9500-bold.ttf', 36)
         
 class Fluxo:
     # --- Seção de carregamento e posicionamento ---
@@ -126,18 +126,18 @@ class Fluxo:
         for coletavel in Coletaveis:
             coletavel.update()
             coletavel.desenhar(screen)
-            pygame.draw.rect(screen, coletavel.cor, coletavel.rect, 2)
+            #pygame.draw.rect(screen, coletavel.cor, coletavel.rect, 2)
 
         for inimigo in Inimigos:
             inimigo.move(player, grupo_colisao, Inimigos)
             inimigo.update()
             inimigo.draw(screen)
 
-        pygame.draw.rect(screen, (255, 255, 0), player.rect, 2)
-        grupo_colisao.draw(screen)
-        for inim in grupo_inimigos:
-            pygame.draw.rect(screen, (0, 255, 0), inim.hitbox, 2)
-            pygame.draw.rect(screen, (255, 255, 0), inim.rect, 2)
+        #pygame.draw.rect(screen, (255, 255, 0), player.rect, 2)
+        #grupo_colisao.draw(screen)
+        #for inim in grupo_inimigos:
+            #pygame.draw.rect(screen, (0, 255, 0), inim.hitbox, 2)
+            #pygame.draw.rect(screen, (255, 255, 0), inim.rect, 2)
 
 # ... (seus imports e inicializações do Pygame) ...
 
@@ -310,5 +310,3 @@ while True:
 
     pygame.display.flip()
     pygame.time.Clock().tick(60)
-
-pygame.quit()
