@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="26">
- <tileset firstgid="1" source="../mapas/0_setup/data/tilesets/world.tsx"/>
- <tileset firstgid="211" source="../mapas/0_setup/data/maps/pixel-cyberpunk-interior.tsx"/>
+ <tileset firstgid="1" source="../graphics/tilesets/world.png"/>
+ <tileset firstgid="211" source="../graphics/tilesets/grades.png"/>
  <layer id="1" name="Terrian" width="20" height="20">
   <data encoding="csv">
 253,253,253,253,253,253,253,253,253,253,253,253,253,253,253,253,253,253,253,253,

@@ -361,9 +361,9 @@ class Niveis:
 # --- FIM DAS MODIFICAÇÕES PARA ESCALA ---
 def criar_niveis():
     return {
-        'Hub': Niveis('data/maps/Hub.tmx', largura_tela, altura_tela),
-        #2: Niveis('mapas prontos\sala1.tmx', largura_tela, altura_tela),
-        1: Niveis('mapas prontos\sala2.tmx', largura_tela, altura_tela)
+        #'Hub': Niveis('mapas prontos\entrada.tmx', largura_tela, altura_tela),
+        1: Niveis('mapas prontos\sala1.tmx', largura_tela, altura_tela)
+        #2: Niveis('mapas prontos\sala2.tmx', largura_tela, altura_tela)
     }
 
 

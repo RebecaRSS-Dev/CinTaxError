@@ -70,39 +70,38 @@ class Inimigo(pygame.sprite.Sprite):
         self_pos = pygame.Vector2(self.rect.center)
         player_pos = pygame.Vector2(player.rect.center)
 
-        # Direção principal (reto para o player)
         direcao_principal = (player_pos - self_pos)
         if direcao_principal.length_squared() == 0:
-            return  # já está no mesmo lugar
+            return
         direcao_principal = direcao_principal.normalize()
 
         velocidade = 2.5
 
-        # Lista de direções a tentar (principal, levemente à esquerda, levemente à direita, etc.)
         angulos = [0, 25, -25, 45, -45, 65, -65, 90, -90]  # graus
-        direcoes_teste = []
         for ang in angulos:
             rad = math.radians(ang)
             rotacionada = direcao_principal.rotate_rad(rad)
-            direcoes_teste.append(rotacionada)
+            moviment = rotacionada * velocidade
 
-        # Testa cada direção e pega a primeira que não colida
-        for direcao in direcoes_teste:
-            moviment = direcao * velocidade
             new_position = self.rect.move(moviment)
             new_hitbox = self.hitbox.copy()
             new_hitbox.center = new_position.center
 
-            if (not any(new_hitbox.colliderect(p.rect) for p in paredes) and
-                not any(new_hitbox.colliderect(i.hitbox) for i in inimigos if i != self)):
-                self.rect = new_position
-                break  # achou caminho válido
+            colisao_paredes = any(new_hitbox.colliderect(p.rect) for p in paredes)
+            colisao_inimigos = any(new_hitbox.colliderect(i.hitbox) for i in inimigos if i != self)
+            colisao_player = new_hitbox.colliderect(player.rect)
 
-        # Checa colisão com o player
-        if self.hitbox.colliderect(player.rect) and player.efeito is None:
-            player.vidas -= 1
-            player.efeito = 'invencibilidade'
-            player.tempo = pygame.time.get_ticks()
+            if not (colisao_paredes or colisao_inimigos or colisao_player):
+                self.rect = new_position
+                self.hitbox.center = self.rect.center
+                break  # movimento válido encontrado
+
+            # Verifique se o inimigo está colidindo com o player agora (mesmo sem mover)
+            if new_hitbox.colliderect(player.rect) and player.efeito is None:
+                player.vidas -= 1
+                player.efeito = 'invencibilidade'
+                player.tempo = pygame.time.get_ticks()
+
 
     def move(self, player, paredes, inimigos):
         newHitbox = self.hitbox

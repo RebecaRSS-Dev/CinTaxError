@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="34">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="41">
  <tileset firstgid="1" source="../graphics/tilesets/pixel-cyberpunk-interior.tsx"/>
  <layer id="1" name="Chão" width="20" height="20">
   <data encoding="csv">
@@ -98,27 +98,32 @@
 </data>
  </layer>
  <objectgroup id="6" name="Collisions">
-  <object id="1" x="1" y="2.33285" width="634" height="57.3343"/>
-  <object id="2" x="94" y="289.333" width="546" height="57.3343"/>
-  <object id="3" x="1" y="449.333" width="318" height="68.3343"/>
-  <object id="4" x="355" y="162.833" width="53" height="25.3343"/>
-  <object id="5" x="485.5" y="99.3329" width="53" height="25.3343"/>
-  <object id="6" x="356.5" y="99.3329" width="53" height="25.3343"/>
-  <object id="7" x="485.5" y="165.333" width="53" height="25.3343"/>
-  <object id="8" x="172.5" y="141.333" width="38" height="28.3343"/>
-  <object id="9" x="3" y="262.833" width="27" height="20.3343"/>
-  <object id="10" x="72" y="142.833" width="38" height="28.3343"/>
-  <object id="11" x="1.5" y="201.833" width="27" height="20.3343"/>
-  <object id="12" x="2.5" y="332.833" width="27" height="20.3343"/>
-  <object id="13" x="553.5" y="364.833" width="43" height="35.3343"/>
-  <object id="14" x="551.5" y="459.333" width="43" height="35.3343"/>
-  <object id="15" x="553.5" y="558.333" width="43" height="35.3343"/>
+  <object id="1" x="1" y="2.33285" width="639" height="65.3343"/>
+  <object id="2" x="94" y="289.333" width="546" height="66.6676"/>
+  <object id="3" x="1" y="449.333" width="327.333" height="68.3343"/>
+  <object id="4" x="355" y="162.833" width="57.6667" height="17.3343"/>
+  <object id="5" x="485.5" y="99.3329" width="55" height="16.6676"/>
+  <object id="6" x="356.5" y="99.3329" width="57.6667" height="16.6676"/>
+  <object id="7" x="485.5" y="162.666" width="53" height="18.001"/>
+  <object id="8" x="164.5" y="167.333" width="56" height="23.6676"/>
+  <object id="9" x="3" y="266.166" width="27" height="9.66763"/>
+  <object id="10" x="67.3333" y="166.833" width="56" height="25.001"/>
+  <object id="11" x="1.5" y="201.833" width="29.6667" height="11.001"/>
+  <object id="12" x="2.5" y="330.166" width="27" height="10.3343"/>
+  <object id="13" x="553.5" y="364.833" width="43" height="27.3343"/>
+  <object id="14" x="551.5" y="459.333" width="43" height="29.3343"/>
+  <object id="15" x="553.5" y="558.333" width="43" height="27.3343"/>
   <object id="16" x="575.5" y="228.333" width="64" height="27.3343"/>
   <object id="17" x="128.5" y="67.3329" width="32" height="29.3343"/>
   <object id="18" x="193.5" y="63.3329" width="94" height="16.3343"/>
   <object id="19" x="-6.5" y="25.3329" width="7.72727" height="614.122"/>
-  <object id="20" x="634.47" y="26.2723" width="7.72727" height="614.122"/>
-  <object id="21" x="638.803" y="635.606" width="7.72727" height="648.789" rotation="90"/>
+  <object id="20" x="639.47" y="26.7723" width="7.72727" height="614.122"/>
+  <object id="21" x="642.803" y="639.606" width="7.72727" height="648.789" rotation="90"/>
+  <object id="34" x="320" y="437" width="10.5" height="140"/>
+  <object id="35" x="1.5" y="437.5" width="329" height="10.5"/>
+  <object id="36" x="-4.5" y="638.5" width="647.5" height="8"/>
+  <object id="37" x="86.6667" y="279.333" width="9.33333" height="105.333"/>
+  <object id="38" x="86.6667" y="277.333" width="554" height="11.3333"/>
  </objectgroup>
  <objectgroup id="7" name="Boss">
   <object id="22" name="Player" x="37.3333" y="140">
@@ -135,7 +140,7 @@
    </properties>
    <point/>
   </object>
-  <object id="24" name="Player" x="612" y="446.667">
+  <object id="24" name="Player" x="424" y="467.334">
    <properties>
     <property name="direction" value="down"/>
     <property name="pos" value="plant"/>
@@ -144,7 +149,7 @@
   </object>
  </objectgroup>
  <objectgroup id="8" name="Coletaveis">
-  <object id="25" name="velocidade" x="456" y="620">
+  <object id="25" name="velocidade" x="128.667" y="260.667">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="o5"/>
@@ -154,7 +159,7 @@
    </properties>
    <point/>
   </object>
-  <object id="27" name="invencibilidade" x="168" y="258.667">
+  <object id="27" name="invencibilidade" x="416" y="606.667">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="o5"/>
@@ -164,7 +169,7 @@
    </properties>
    <point/>
   </object>
-  <object id="29" name="pontos" x="234.667" y="430.667">
+  <object id="29" name="pontos" x="209" y="417.334">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="o5"/>
@@ -206,7 +211,7 @@
   </object>
  </objectgroup>
  <objectgroup id="9" name="player_start">
-  <object id="33" name="player_start" x="40" y="602.667">
+  <object id="33" name="player_start" x="55.5" y="599.167">
    <point/>
   </object>
  </objectgroup>
