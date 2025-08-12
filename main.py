@@ -19,6 +19,10 @@ AMARELO = (255,255,0)
 ROSA = (255, 0, 255)
 BRANCO = (255, 255, 255)
 
+#Fontes:
+fonte_pequena = pygame.font.Font('ari-w9500-bold.ttf', 20)
+fonte_pequena = pygame.font.Font('ari-w9500-bold.ttf', 36)
+
 #classe botão
 class Botao:
     def __init__(self, x, y, imagem_normal, imagem_selecionada):
@@ -50,7 +54,7 @@ class Fluxo:
         try:
             # Telas
             self.imagem_tela_start = pygame.transform.scale(pygame.image.load('imagens/Telas/Tela inicial.jpg').convert(), (largura_tela, altura_tela))
-            self.imagem_tela_gameover = pygame.transform.scale(pygame.image.load('imagens\Telas\Game Over.jpg').convert(), (largura_tela, altura_tela))
+            self.imagem_tela_gameover = pygame.transform.scale(pygame.image.load('imagens/Telas/Game Over.jpg').convert(), (largura_tela, altura_tela))
 
             # Botões start
             self.botao_jogar_img = pygame.image.load('imagens/Telas/Botao_start.png').convert_alpha()
@@ -371,5 +375,8 @@ while True:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 exit()
+    
+    
+    
     pygame.display.flip()
     pygame.time.Clock().tick(60)
