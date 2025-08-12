@@ -51,7 +51,7 @@ player_rect = pygame.Rect(350, 250, 50, 50)
 VELOCIDADE_NORMAL = 7
 velocidade_jogador = VELOCIDADE_NORMAL
 pontuacao = 0
-fonte = pygame.font.Font(None, 50)
+fonte = pygame.font.Font("ari-w9500-bold.ttf", 32)
 cor_jogador = VERMELHO
 
 # ### NOVAS VARIÁVEIS PARA CONTROLE DE EFEITOS ###
