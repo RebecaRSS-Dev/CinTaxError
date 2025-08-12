@@ -296,6 +296,8 @@ while True:
                 pygame.quit()
                 exit()
     
+    # Desenha a pontuação na tela
+
     if fluxoDeJogo.start == False and fluxoDeJogo.jogando == True:
         texto_pontuacao = fonte_grande.render(f"Pontos: {ObjNivel.player.pontuacao}", True, Cores.BRANCO)
         screen.blit(texto_pontuacao, (10, 10))
