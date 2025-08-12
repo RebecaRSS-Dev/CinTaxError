@@ -19,6 +19,7 @@ class Player:
         self.vidas = 1
         self.efeito = None
         self.fragmentos = 0
+        self.pontos = 0
         
         #Booleano de mudar de fase
         self.mudarFase = False
@@ -94,12 +95,12 @@ class Player:
                     self.efeito = None
         else:
             if tipo == 1 and pygame.time.get_ticks() - self.tempo < 5000:
-                self.velocidade = 6
-                self.efeito = 'velocidade'
+                self.pontos += pontos
             elif tipo == 2 and pygame.time.get_ticks() - self.tempo < 5000:
                 self.efeito = 'invencibilidade'
             elif tipo == 3:
-                pass
+                self.velocidade = 6
+                self.efeito = 'velocidade'
             elif tipo==4:
                 self.fragmentos +=1
                 self.mudarFase = True

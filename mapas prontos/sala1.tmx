@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="44">
  <tileset firstgid="1" name="pixel-cyberpunk-interior" tilewidth="32" tileheight="32" tilecount="231" columns="21">
-  <image source="../pixel-cyberpunk-interior.png" width="672" height="352"/>
+  <image source="../graphics/tilesets/pixel-cyberpunk-interior.tsx" width="672" height="352"/>
  </tileset>
  <tileset firstgid="232" name="neo_zero_tileset_02" tilewidth="32" tileheight="32" tilecount="54" columns="9">
   <image source="../../Documents/neo_zero_tileset_02.png" width="304" height="208"/>

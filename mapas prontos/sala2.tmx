@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="34">
- <tileset firstgid="1" source="../pixel-cyberpunk-interior.tsx"/>
+ <tileset firstgid="1" source="../graphics/tilesets/pixel-cyberpunk-interior.tsx"/>
  <layer id="1" name="Chão" width="20" height="20">
   <data encoding="csv">
 3,3,3,3,3,3,3,4,5,5,5,5,5,5,5,5,5,5,5,5,

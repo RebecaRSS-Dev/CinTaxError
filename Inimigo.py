@@ -1,5 +1,6 @@
 import pygame
 import math
+import random
 
 def carregar_frames(sprite_sheet_path, num_frames, frame_width, frame_height):
     sheet = pygame.image.load(sprite_sheet_path).convert_alpha()
@@ -10,7 +11,7 @@ def carregar_frames(sprite_sheet_path, num_frames, frame_width, frame_height):
     return frames
 
 class Inimigo(pygame.sprite.Sprite):
-    def __init__(self, x, y, inicial):
+    def __init__(self, x, y):
         super().__init__()
 
         # Parâmetros da animação
@@ -34,7 +35,7 @@ class Inimigo(pygame.sprite.Sprite):
             pygame.Vector2(-1, 0),
             pygame.Vector2(0, -1)
         ]
-        self.contador = inicial
+        self.contador = random.randint(0, 3)
         self.tempo = pygame.time.get_ticks()
         self.movimento = self.movimentos[self.contador]
 

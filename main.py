@@ -215,30 +215,88 @@ class Coletavel:
 
 # --- INÍCIO DAS MODIFICAÇÕES PARA ESCALA ---
 class Niveis:
-    def __init__(self,arquivo_tmx, largura_tela, altura_tela,player,inimigos,colecionaveis):
+    def __init__(self, arquivo_tmx, largura_tela, altura_tela):
         self.mapa_tiled = pytmx.load_pygame(arquivo_tmx)
 
-        # 1. CALCULAR FATOR DE ESCALA
+        # 1. Calcular fator de escala
         map_altura_pixels_original = self.mapa_tiled.height * self.mapa_tiled.tileheight
         self.fator_escala = altura_tela / map_altura_pixels_original
 
-        # 2. CALCULAR NOVAS DIMENSÕES E OFFSET
+        # 2. Calcular dimensões escaladas
         map_largura_pixels_escalada = (self.mapa_tiled.width * self.mapa_tiled.tilewidth) * self.fator_escala
         self.tile_width_escalado = self.mapa_tiled.tilewidth * self.fator_escala
         self.tile_height_escalado = self.mapa_tiled.tileheight * self.fator_escala
 
+        # Offsets para centralizar o mapa
         self.offset_x = (largura_tela - map_largura_pixels_escalada) / 2
-        self.offset_y = 0  # O mapa começa no topo da tela
+        self.offset_y = 0
 
-        # Cache para armazenar imagens já redimensionadas e evitar trabalho repetido
+        # Cache para armazenar imagens já redimensionadas
         self.cache_tiles = {}
 
-        #Criar os Grupos
-        self.player = player
+        # Criar grupo de colisões
         self.grupo_colisao = self.criar_colisoes()
+
+        # Carregar objetos do mapa
+        player_pos, inimigos, coletaveis = self.carregar_objetos(self.mapa_tiled)
+
+        # Player escalado conforme tamanho do tile
+        largura_player = self.tile_width_escalado
+        altura_player = self.tile_height_escalado
+
+        # Se for o mapa Hub, player é 2x maior
+        if "Hub" in arquivo_tmx:
+            largura_player *= 2
+            altura_player *= 2
+
+        self.player = Player(player_pos[0], player_pos[1], largura_player, altura_player)
         self.grupo_inimigos = inimigos
-        self.grupo_colecionaveis = colecionaveis
-        
+        self.grupo_colecionaveis = coletaveis
+    
+    def carregar_objetos(self, tmx_data):
+        player_start = (0, 0)
+        inimigos = []
+        coletaveis = []
+
+        for layer in tmx_data.layers:
+            if isinstance(layer, pytmx.TiledObjectGroup):
+                for obj in layer:
+                    if not getattr(obj, "visible", True):
+                        continue
+
+                    # Corrigir posição com escala + offset
+                    x = obj.x * self.fator_escala + self.offset_x
+                    y = obj.y * self.fator_escala + self.offset_y
+
+                    # Se for tile object, ajustar y para o topo do tile
+                    if getattr(obj, "gid", None) is not None:
+                        y = (obj.y - obj.height) * self.fator_escala + self.offset_y
+
+                    # Player start (usar centro)
+                    if obj.name == "player_start":
+                        player_start = (x, y)
+
+                    elif obj.name == "Player":
+                        inimigo = Inimigo(0, 0)
+                        inimigo.rect.center = (x, y)
+                        inimigo.hitbox.center = inimigo.rect.center
+                        inimigos.append(inimigo)
+
+                    elif obj.name == "pontos":
+                        coletavel = Coletavel(x, y, 1)
+                        coletaveis.append(coletavel)
+
+                    elif obj.name == "velocidade":
+                        coletavel = Coletavel(x, y, 2)
+                        coletaveis.append(coletavel)
+
+                    elif obj.name == "invencibilidade":
+                        coletavel = Coletavel(x, y, 3)
+                        coletaveis.append(coletavel)
+
+        return player_start, inimigos, coletaveis
+
+
 
     def desenhar_mapa(self,surface):
         for camada in self.mapa_tiled.visible_layers:
@@ -297,20 +355,11 @@ class Niveis:
         
 
 # --- FIM DAS MODIFICAÇÕES PARA ESCALA ---
-
-
 def criar_niveis():
     return {
-        'Hub': Niveis('data/maps/Hub.tmx', largura_tela, altura_tela,
-                      Player(largura_tela/2, altura_tela-80, 80, 80), [], []),
-        1: Niveis('data/maps/grad1.tmx', largura_tela, altura_tela,
-                  Player(500, 500, 40, 40),
-                  [Inimigo(700, 700, 2), Inimigo(800, 800, 1)],
-                  [Coletavel(800, 700, 1), Coletavel(800, 200, 2), Coletavel(600, 600, 4)]),
-        2: Niveis('data/maps/grad2.tmx', largura_tela, altura_tela,
-                  Player(200, 500, 40, 40),
-                  [Inimigo(350, 350, 1)],
-                  [Coletavel(300, 500, 4)])
+        'Hub': Niveis('data/maps/Hub.tmx', largura_tela, altura_tela),
+        #2: Niveis('mapas prontos\sala1.tmx', largura_tela, altura_tela),
+        1: Niveis('mapas prontos\sala2.tmx', largura_tela, altura_tela)
     }
 
 
