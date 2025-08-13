@@ -1,8 +1,8 @@
 import pygame
 import pytmx
-from Services.Coletavel import Coletavel
-from Services.Inimigo import Inimigo
-from Services.Obstaculo import Obstacle
+from entidades.Coletavel import Coletavel
+from entidades.Inimigo import Inimigo
+from entidades.Obstaculo import Obstacle
 
 class Niveis:
     def __init__(self, arquivo_tmx, player, largura_tela, altura_tela):
