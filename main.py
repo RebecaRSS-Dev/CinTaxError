@@ -95,8 +95,6 @@ while True:
         
         ObjNivel, nivelAtual, vida, pontuacao, efeito, fragmentos, teleporte_cooldown = transicoes.irParaHub(ObjNivel, ObjetosNiveis, nivelAtual, teleporte_cooldown)
         
-        print('print',ObjNivel, ObjetosNiveis, nivelAtual, teleporte_cooldown)
-
         if vida is not None:
             ObjNivel.player.vidas = vida
             ObjNivel.player.pontuacao = pontuacao
