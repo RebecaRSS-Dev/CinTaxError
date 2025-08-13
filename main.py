@@ -124,7 +124,7 @@ class Fluxo:
         player.efeitos(Coletaveis)
 
         for coletavel in Coletaveis:
-            coletavel.update()
+            coletavel.update(player.fragmentos)
             coletavel.desenhar(screen)
             #pygame.draw.rect(screen, coletavel.cor, coletavel.rect, 2)
 
@@ -247,8 +247,6 @@ while True:
         Coletaveis = ObjNivel.grupo_colecionaveis
         grupo_inimigos = pygame.sprite.Group(Inimigos)
 
-        
-
         vida, pontuacao, efeito, fragmentos = irParaHub()
         
         if vida is not None:
@@ -295,18 +293,22 @@ while True:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 exit()
-    
+
     # Desenha a pontuação na tela
 
     if fluxoDeJogo.start == False and fluxoDeJogo.jogando == True:
-        texto_pontuacao = fonte_grande.render(f"Pontos: {ObjNivel.player.pontuacao}", True, Cores.BRANCO)
+        texto_pontuacao = fonte_grande.render(f"Pontos: {ObjNivel.player.pontuacao}", False, Cores.BRANCO)
         screen.blit(texto_pontuacao, (10, 10))
-        texto_fragmentos = fonte_grande.render(f"Fragmentos: {ObjNivel.player.fragmentos}", True, Cores.BRANCO)
+        texto_fragmentos = fonte_grande.render(f"Fragmentos: {ObjNivel.player.fragmentos}", False, Cores.BRANCO)
         screen.blit(texto_fragmentos, (10, 80))
-        texto_vidas = fonte_grande.render(f"Vidas: {ObjNivel.player.vidas}", True, Cores.BRANCO)
+        texto_vidas = fonte_grande.render(f"Vidas: {ObjNivel.player.vidas}", False, Cores.BRANCO)
         screen.blit(texto_vidas, (largura_tela*0.90, 10))
-        texto_efeito = fonte_grande.render(f"Efeito: {ObjNivel.player.efeito if ObjNivel.player.efeito else 'Nenhum'}", True, Cores.BRANCO)
-        screen.blit(texto_efeito, (largura_tela*0.85, 80))
+        if not (ObjNivel.player.efeito):
+            texto_efeito = fonte_grande.render("Efeito: Nenhum", False, Cores.BRANCO)
+            screen.blit(texto_efeito, (largura_tela*0.85, 80))
+        else:
+            texto_efeito = fonte_grande.render(f"Efeito: {ObjNivel.player.efeito}", False, Cores.BRANCO)
+            screen.blit(texto_efeito, (largura_tela*0.82, 80))
 
     pygame.display.flip()
     pygame.time.Clock().tick(60)
