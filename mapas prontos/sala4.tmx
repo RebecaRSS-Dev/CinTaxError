@@ -140,8 +140,8 @@
   <object id="98" x="263.333" y="332.333" width="45.6667" height="29.6667"/>
   <object id="99" x="263.667" y="429" width="45.3333" height="29.6667"/>
   <object id="100" x="191.667" y="64" width="96.3333" height="31"/>
-  <object id="103" x="-5.79167" y="0.000166667" width="8.25" height="637.833"/>
-  <object id="104" x="640.042" y="1.91683" width="8.25" height="637"/>
+  <object id="103" x="-0.79167" y="0.000166667" width="8.25" height="637.833"/>
+  <object id="104" x="633.042" y="2.91683" width="8.25" height="637"/>
  </objectgroup>
  <objectgroup id="8" name="Boss">
   <object id="6" name="Player" x="577.333" y="389.333">
@@ -167,7 +167,7 @@
   </object>
  </objectgroup>
  <objectgroup id="11" name="Coletaveis">
-  <object id="105" name="pontos" x="97.3333" y="603">
+  <object id="105" name="pontos" x="116.333" y="591">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="o5"/>

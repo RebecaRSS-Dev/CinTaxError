@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="38">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="39">
  <tileset firstgid="1" source="../graphics/tilesets/pixel-cyberpunk-interior.tsx"/>
  <layer id="1" name="Terrain" width="20" height="20">
   <data encoding="csv">
@@ -108,8 +108,7 @@
   <object id="8" x="0.999983" y="3.16617" width="634" height="57.3343"/>
   <object id="9" x="0.0755909" y="6.10558" width="4.6973" height="633.88"/>
   <object id="10" x="634.651" y="13.06" width="6.6973" height="624.88"/>
-  <object id="11" x="639.651" y="634.56" width="6.6973" height="636.88" rotation="90"/>
-  <object id="13" x="282.5" y="310" width="301.667" height="79.3343"/>
+  <object id="13" x="281.5" y="310" width="301.667" height="79.3343"/>
   <object id="14" x="235.667" y="198.833" width="40" height="45.001"/>
   <object id="15" x="279.167" y="314.166" width="7.6667" height="101.668"/>
   <object id="16" x="577.167" y="313.166" width="7.6667" height="101.668"/>
@@ -122,6 +121,7 @@
   <object id="33" x="66.6667" y="418" width="26.3333" height="18.3333"/>
   <object id="34" x="66" y="484.333" width="27.6667" height="18.3333"/>
   <object id="35" x="65.3333" y="547" width="28.3333" height="18.6667"/>
+  <object id="38" x="0" y="637" width="639" height="5"/>
  </objectgroup>
  <objectgroup id="6" name="Boss">
   <object id="23" name="Player" x="458" y="103.333">
@@ -217,7 +217,7 @@
    </properties>
    <point/>
   </object>
-  <object id="37" name="fragmento" x="319" y="104">
+  <object id="37" name="fragmento" x="306" y="113">
    <point/>
   </object>
  </objectgroup>

@@ -159,7 +159,7 @@
    </properties>
    <point/>
   </object>
-  <object id="27" name="invencibilidade" x="416" y="606.667">
+  <object id="27" name="invencibilidade" x="414" y="592.667">
    <properties>
     <property name="change_direction" type="bool" value="true"/>
     <property name="character_id" value="o5"/>

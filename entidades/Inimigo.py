@@ -48,7 +48,7 @@ class Inimigo(pygame.sprite.Sprite):
                 self.contador = 0
             self.movimento = self.movimentos[self.contador]
         else:
-            moviment = self.movimento * 2
+            moviment = self.movimento * 1.8
             newPosition = self.rect.move(moviment)
             newHitbox = self.hitbox.copy()
             newHitbox.center = newPosition.center
@@ -58,7 +58,7 @@ class Inimigo(pygame.sprite.Sprite):
                 if self.contador > 3:
                     self.contador -= 4
                 self.movimento = self.movimentos[self.contador]
-                moviment = self.movimento * 2
+                moviment = self.movimento * 1.8
                 newPosition = self.rect.move(moviment)
                 newHitbox = self.hitbox
                 self.rect = newPosition
