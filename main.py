@@ -202,7 +202,7 @@ def irParaHub():
         ObjNivel.player.mudarFase = False
         ObjNivel = ObjetosNiveis[nivelAtual]
         ObjNivel.player.rect.center = ObjNivel.player_pos
-        teleporte_cooldown = 300  # meio segundo de cooldown a 60fps
+        teleporte_cooldown = 100  # meio segundo de cooldown a 60fps
 
         return ObjNivel.player.vidas, ObjNivel.player.pontuacao, ObjNivel.player.efeito, ObjNivel.player.fragmentos
     return None, None, None, None
@@ -276,6 +276,8 @@ while True:
 
         vida, pontuacao, efeito, fragmentos = irParaHub()
         
+        
+
         if vida is not None:
             ObjNivel.player.vidas = vida
             ObjNivel.player.pontuacao = pontuacao
@@ -284,7 +286,6 @@ while True:
         
         # Passa o grupo de colisão TOTAL para a função de jogo
         fluxoDeJogo.jogo(ObjNivel.player, ObjNivel, grupo_colisao_total, Inimigos, Coletaveis, grupo_inimigos)
-
         if teleporte_cooldown > 0:
             teleporte_cooldown -= 1
         else:

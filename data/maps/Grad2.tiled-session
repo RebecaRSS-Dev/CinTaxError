@@ -23,6 +23,9 @@
             "dynamicWrapping": true,
             "scaleInDock": 1
         },
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/graphics/tilesets/world.tsx": {
+            "scaleInDock": 1
+        },
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/entrada.tmx": {
             "expandedObjectLayers": [
                 9,
@@ -55,8 +58,8 @@
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 344,
-                "y": 304
+                "x": 320.5,
+                "y": 319.5
             }
         },
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala1.tmx#neo_zero_buildings_02": {
@@ -73,29 +76,29 @@
         },
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala2.tmx": {
             "expandedObjectLayers": [
-                6,
-                9,
                 8,
+                9,
+                6,
                 7
             ],
             "scale": 1,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 424,
-                "y": 438
+                "x": 486,
+                "y": 320.5
             }
         },
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala3.tmx": {
             "expandedObjectLayers": [
+                5,
                 6,
-                7,
-                5
+                7
             ],
-            "scale": 1,
-            "selectedLayer": 6,
+            "scale": 1.5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 404,
-                "y": 412
+                "x": 286.6666666666667,
+                "y": 451.99999999999994
             }
         },
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala3.tmx#grades": {
@@ -103,13 +106,14 @@
         },
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala4.tmx": {
             "expandedObjectLayers": [
+                8,
                 11
             ],
             "scale": 1,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 404,
-                "y": 388
+                "x": 320,
+                "y": 320.5
             }
         },
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/pixel-cyberpunk-interior.tsx": {
@@ -128,19 +132,21 @@
     "last.imagePath": "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/graphics/tilesets",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
-        "grad2.tmx",
-        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/graphics/tilesets/pixel-cyberpunk-interior.tsx",
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala1.tmx",
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala2.tmx",
-        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala3.tmx"
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala3.tmx",
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala4.tmx",
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/entrada.tmx"
     ],
     "project": "Grad2.tiled-project",
     "recentFiles": [
-        "grad2.tmx",
-        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/graphics/tilesets/pixel-cyberpunk-interior.tsx",
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala1.tmx",
         "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala2.tmx",
-        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala3.tmx"
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/entrada.tmx",
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala4.tmx",
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/mapas prontos/sala3.tmx",
+        "grad2.tmx",
+        "C:/Users/Pedro/Documents/Codigos/IP/Projeto Final/graphics/tilesets/pixel-cyberpunk-interior.tsx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",

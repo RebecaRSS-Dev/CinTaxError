@@ -83,17 +83,17 @@ class Player:
         tipo, pontos = self.coletar(coletaveis)
         if tipo == None:
             if self.efeito=='velocidade':
-                if pygame.time.get_ticks() - self.tempo > 5000:
+                if pygame.time.get_ticks() - self.tempo > 2500:
                     self.velocidade = 4
                     self.efeito = None
             elif self.efeito=='invencibilidade':
-                if pygame.time.get_ticks() - self.tempo > 5000:
+                if pygame.time.get_ticks() - self.tempo > 2500:
                     self.velocidade = 4
                     self.efeito = None
         else:
             if tipo == 1:
                 self.pontuacao += pontos
-            elif tipo == 2 and pygame.time.get_ticks() - self.tempo < 5000:
+            elif tipo == 2 and pygame.time.get_ticks() - self.tempo < 2500:
                 self.efeito = 'invencibilidade'
                 self.pontuacao += pontos
             elif tipo == 3:
