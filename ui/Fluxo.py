@@ -3,6 +3,7 @@ from graphics.Cores import Cores
 from ui.Botao import Botao
 from ui.ConfigsTela import ConfigsTela
 
+pygame.init()
 class Fluxo:
     # --- Seção de carregamento e posicionamento ---
     def __init__(self):
@@ -16,7 +17,7 @@ class Fluxo:
             # Telas
             self.imagem_tela_start = pygame.transform.scale(pygame.image.load('imagens/Telas/Tela inicial.jpg').convert(), (largura_tela, altura_tela))
             self.imagem_tela_gameover = pygame.transform.scale(pygame.image.load('imagens/Telas/Game Over.jpg').convert(), (largura_tela, altura_tela))
-            self.imagem_tela_win = pygame.transform.scale(pygame.image.load('imagens\Telas\You Win.jpg').convert(), (largura_tela, altura_tela))
+            self.imagem_tela_win = pygame.transform.scale(pygame.image.load('imagens/Telas/You Win.jpg').convert(), (largura_tela, altura_tela))
 
             # Botões start
             self.botao_jogar_img = pygame.image.load('imagens/Telas/Botao_start.png').convert_alpha()
@@ -69,7 +70,7 @@ class Fluxo:
             botao.checar_hover(posicao_mouse)
             botao.desenhar(tela)
 
-    def telaDeGameOver(self):
+    def telaDeGameOver(self, nivelAtual, ObjNivel, ObjetosNiveis):
         posicao_mouse = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -81,7 +82,6 @@ class Fluxo:
                     exit()
                 
                 if self.botao_restart.rect.collidepoint(posicao_mouse):
-                    global nivelAtual, ObjNivel, ObjetosNiveis
                     ObjetosNiveis = configs.niveis  # Acessa o dicionário de níveis da configuração global
                     nivelAtual = 'Hub'
                     ObjNivel = ObjetosNiveis[nivelAtual]
@@ -102,8 +102,10 @@ class Fluxo:
         for botao in self.botoes_gameover:
             botao.checar_hover(posicao_mouse)
             botao.desenhar(screen)
+        
+        return nivelAtual, ObjNivel, ObjetosNiveis
 
-    def telaDeVitoria(self):
+    def telaDeVitoria(self, nivelAtual, ObjNivel, ObjetosNiveis):
         posicao_mouse = pygame.mouse.get_pos()
         
         for event in pygame.event.get():
@@ -116,7 +118,6 @@ class Fluxo:
                     pygame.quit()
                     exit()
                 if self.botao_restart.rect.collidepoint(posicao_mouse):
-                    global nivelAtual, ObjNivel, ObjetosNiveis
                     ObjetosNiveis = configs.niveis  # Acessa o dicionário de níveis da configuração global
                     nivelAtual = 'Hub'
                     ObjNivel = ObjetosNiveis[nivelAtual]
@@ -137,6 +138,8 @@ class Fluxo:
         for botao in self.botoes_gameover: # Reutilizando os botões da tela de Game Over
             botao.checar_hover(posicao_mouse)
             botao.desenhar(screen)  
+            
+        return nivelAtual, ObjNivel, ObjetosNiveis
 
     def jogo(self, player, NivelAtual, grupo_colisao, Inimigos, Coletaveis, grupo_inimigos):
         teclasPressionadas = pygame.key.get_pressed()

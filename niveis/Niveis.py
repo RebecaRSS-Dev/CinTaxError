@@ -4,6 +4,7 @@ from entidades.Coletavel import Coletavel
 from entidades.Inimigo import Inimigo
 from entidades.Obstaculo import Obstacle
 
+pygame.init()
 class Niveis:
     def __init__(self, arquivo_tmx, player, largura_tela, altura_tela):
         self.mapa_tiled = pytmx.load_pygame(arquivo_tmx)

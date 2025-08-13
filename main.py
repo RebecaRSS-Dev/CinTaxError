@@ -1,6 +1,5 @@
 import pygame
 from niveis.Transicoes import Transicoes
-from entidades.Player import Player
 from graphics.Cores import Cores
 from entidades.Obstaculo import Obstacle
 from ui.Fluxo import Fluxo
@@ -134,10 +133,10 @@ while True:
     
     #ver se o jogo terminou ou se o jogador venceu
     if fluxoDeJogo.derrotado:
-        fluxoDeJogo.telaDeGameOver()
+        nivelAtual, ObjNivel, ObjetosNiveis = fluxoDeJogo.telaDeGameOver(nivelAtual, ObjNivel, ObjetosNiveis)
     
     if fluxoDeJogo.vitoria:
-        fluxoDeJogo.telaDeVitoria()
+        nivelAtual, ObjNivel, ObjetosNiveis = fluxoDeJogo.telaDeVitoria(nivelAtual, ObjNivel, ObjetosNiveis)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
