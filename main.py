@@ -157,12 +157,18 @@ while True:
         screen.blit(texto_fragmentos, (10, 80))
         texto_vidas = fonte_grande.render(f"Vidas: {ObjNivel.player.vidas}", False, Cores.BRANCO)
         screen.blit(texto_vidas, (largura_tela*0.90, 10))
+        
         if not (ObjNivel.player.efeito):
             texto_efeito = fonte_grande.render("Efeito: Nenhum", False, Cores.BRANCO)
             screen.blit(texto_efeito, (largura_tela*0.85, 80))
         else:
-            texto_efeito = fonte_grande.render(f"Efeito: {ObjNivel.player.efeito}", False, Cores.BRANCO)
-            screen.blit(texto_efeito, (largura_tela*0.82, 80))
+            if (ObjNivel.player.efeito == 'velocidade'):
+                texto_efeito = fonte_grande.render(f"Efeito: {ObjNivel.player.efeito}", False, Cores.BRANCO)
+                screen.blit(texto_efeito, (largura_tela*0.82, 80))
+            else:
+                fonte_grande_1 = pygame.font.Font('./graphics/fonts/ari-w9500-bold.ttf', 28)
+                texto_efeito = fonte_grande_1.render(f"Efeito: {ObjNivel.player.efeito}", False, Cores.BRANCO)
+                screen.blit(texto_efeito, (largura_tela*0.82, 80))
 
     pygame.display.flip()
     pygame.time.Clock().tick(60)

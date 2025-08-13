@@ -79,6 +79,7 @@ class Fluxo:
                     self.rodando = False
                     pygame.quit()
                     exit()
+                
                 if self.botao_restart.rect.collidepoint(posicao_mouse):
                     global nivelAtual, ObjNivel, ObjetosNiveis
                     ObjetosNiveis = configs.niveis  # Acessa o dicionário de níveis da configuração global
@@ -97,6 +98,7 @@ class Fluxo:
                     self.derrotado = False
 
         screen.blit(self.imagem_tela_gameover, (0, 0))
+        
         for botao in self.botoes_gameover:
             botao.checar_hover(posicao_mouse)
             botao.desenhar(screen)
