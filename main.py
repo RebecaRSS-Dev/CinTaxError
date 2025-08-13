@@ -28,6 +28,7 @@ class Fluxo:
             # Telas
             self.imagem_tela_start = pygame.transform.scale(pygame.image.load('imagens/Telas/Tela inicial.jpg').convert(), (largura_tela, altura_tela))
             self.imagem_tela_gameover = pygame.transform.scale(pygame.image.load('imagens/Telas/Game Over.jpg').convert(), (largura_tela, altura_tela))
+            self.imagem_tela_vitoria = pygame.transform.scale(pygame.image.load('imagens/Telas/You Win.jpg').convert(), (largura_tela, altura_tela))
 
             # Botões start
             self.botao_jogar_img = pygame.image.load('imagens/Telas/Botao_start.png').convert_alpha()
@@ -107,13 +108,46 @@ class Fluxo:
                     self.jogando = True
                     self.derrotado = False
 
-
-
-
         screen.blit(self.imagem_tela_gameover, (0, 0))
         for botao in self.botoes_gameover:
             botao.checar_hover(posicao_mouse)
             botao.desenhar(screen)
+
+    def telaDeVitoria(self):
+        posicao_mouse = pygame.mouse.get_pos()
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.rodando = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.botao_sair_go.rect.collidepoint(posicao_mouse):
+                    self.rodando = False
+                    pygame.quit()
+                    exit()
+                if self.botao_restart.rect.collidepoint(posicao_mouse):
+                    global nivelAtual, ObjNivel, ObjetosNiveis
+                    ObjetosNiveis = criar_niveis()
+                    nivelAtual = 'Hub'
+                    ObjNivel = ObjetosNiveis[nivelAtual]
+                    
+                     # Reseta posição e atributos importantes do player
+                    ObjNivel.player.rect.center = ObjNivel.player_pos
+                    ObjNivel.player.vidas = 3
+                    ObjNivel.player.pontuacao = 0
+                    ObjNivel.player.fragmentos = 0
+                    ObjNivel.player.velocidade = 4
+                    ObjNivel.player.efeito = None
+
+                    # Reseta os estados do fluxo de jogo
+                    self.jogando = True
+                    self.vitoria = False
+
+        # Desenha a tela de fundo e os botões
+        screen.blit(self.imagem_tela_vitoria, (0, 0))
+        for botao in self.botoes_gameover: # Reutilizando os botões da tela de Game Over
+            botao.checar_hover(posicao_mouse)
+            botao.desenhar(screen)        
+            
 
     def jogo(self, player, NivelAtual, grupo_colisao, Inimigos, Coletaveis, grupo_inimigos):
         teclasPressionadas = pygame.key.get_pressed()
@@ -133,13 +167,6 @@ class Fluxo:
             inimigo.update()
             inimigo.draw(screen)
 
-        #pygame.draw.rect(screen, (255, 255, 0), player.rect, 2)
-        #grupo_colisao.draw(screen)
-        #for inim in grupo_inimigos:
-            #pygame.draw.rect(screen, (0, 255, 0), inim.hitbox, 2)
-            #pygame.draw.rect(screen, (255, 255, 0), inim.rect, 2)
-
-# ... (seus imports e inicializações do Pygame) ...
 
 # Dicionário que define quantos fragmentos são necessários para cada sala
 REQUISITOS_FRAGMENTOS = {
@@ -281,9 +308,17 @@ while True:
         if ObjNivel.player.vidas <= 0:
             fluxoDeJogo.jogando = False
             fluxoDeJogo.derrotado = True
+        
+        if ObjNivel.player.fragmentos >= 4 and nivelAtual == 'Hub':
+            fluxoDeJogo.jogando = False
+            fluxoDeJogo.vitoria = True
     
+    #ver se o jogo terminou ou se o jogador venceu
     if fluxoDeJogo.derrotado:
         fluxoDeJogo.telaDeGameOver()
+    
+    if fluxoDeJogo.vitoria:
+        fluxoDeJogo.telaDeVitoria()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
