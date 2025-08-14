@@ -15,7 +15,7 @@ class Inimigo(pygame.sprite.Sprite):
         super().__init__()
 
         # Parâmetros da animação
-        self.frames = carregar_frames("SpriteSheet-Inimigo.png", 6, 250, 250)
+        self.frames = carregar_frames("imagens\Sprites\SpriteSheet-Inimigo.png", 6, 250, 250)
         self.current_frame = 0
         self.animation_timer = pygame.time.get_ticks()
         self.animation_speed = 100  # ms entre frames
