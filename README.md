@@ -109,8 +109,8 @@ Essa organização segue o princípio de **responsabilidade única**, facilitand
 ### 2️⃣ Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/byte-adventure.git
-cd byte-adventure
+git clone https://github.com/RebecaRSS-Dev/CinTaxError.git
+cd CinTaxError
 ```
 
 ### 3️⃣ Criar ambiente virtual *(opcional, mas recomendado)*
@@ -132,7 +132,7 @@ pip install -r requirements.txt
 ### 5️⃣ Executar o jogo
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 ---
