@@ -14,7 +14,7 @@ class Player:
         self.image = self.frames[self.frame_atual]
         self.image = pygame.transform.scale(self.image,(largura,altura))
         self.rect = self.image.get_rect(center=(x, y))
-        self.velocidade = 0.1*largura
+        self.velocidade = 4
 
         #Definir o atributos inicais:
         self.vidas = 3

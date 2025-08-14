@@ -133,7 +133,7 @@ while True:
     
     #ver se o jogo terminou ou se o jogador venceu
     if fluxoDeJogo.derrotado:
-        nivelAtual, ObjNivel, ObjetosNiveis = fluxoDeJogo.telaDeGameOver(nivelAtual, ObjNivel, ObjetosNiveis)
+        nivelAtual, ObjNivel, ObjetosNiveis, player = fluxoDeJogo.telaDeGameOver(nivelAtual, ObjNivel, ObjetosNiveis,player)
     
     if fluxoDeJogo.vitoria:
         nivelAtual, ObjNivel, ObjetosNiveis = fluxoDeJogo.telaDeVitoria(nivelAtual, ObjNivel, ObjetosNiveis)

@@ -2,6 +2,7 @@ import pygame
 from graphics.Cores import Cores
 from ui.Botao import Botao
 from ui.ConfigsTela import ConfigsTela
+from niveis.Niveis import Niveis
 
 pygame.init()
 class Fluxo:
@@ -70,7 +71,7 @@ class Fluxo:
             botao.checar_hover(posicao_mouse)
             botao.desenhar(tela)
 
-    def telaDeGameOver(self, nivelAtual, ObjNivel, ObjetosNiveis):
+    def telaDeGameOver(self, nivelAtual, ObjNivel, ObjetosNiveis, player):
         posicao_mouse = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -82,20 +83,26 @@ class Fluxo:
                     exit()
                 
                 if self.botao_restart.rect.collidepoint(posicao_mouse):
-                    ObjetosNiveis = configs.niveis  # Acessa o dicionário de níveis da configuração global
+                    # recria dicionário de objetos de nível
+                    configs.niveis = {}
+                    for nome, caminho in configs.arquivos_tmx.items():
+                        configs.niveis[nome] = Niveis(caminho, player, largura_tela, altura_tela)
+
+                    ObjetosNiveis = configs.niveis
+
                     nivelAtual = 'Hub'
                     ObjNivel = ObjetosNiveis[nivelAtual]
-                    
-                    # Reseta posição e atributos importantes do player
-                    ObjNivel.player.rect.center = ObjNivel.player_pos
-                    ObjNivel.player.vidas = 3  # ou o valor padrão que quiser
+
+                    # reset atributos do player do novo ObjNivel
+                    ObjNivel.player.vidas = 3
                     ObjNivel.player.pontuacao = 0
                     ObjNivel.player.fragmentos = 0
-                    ObjNivel.player.velocidade = 4  # velocidade padrão
-                    ObjNivel.player.efeito = None  # se for usado
+                    ObjNivel.player.velocidade = 4
+                    ObjNivel.player.efeito = None
 
                     self.jogando = True
                     self.derrotado = False
+
 
         screen.blit(self.imagem_tela_gameover, (0, 0))
         
@@ -103,7 +110,7 @@ class Fluxo:
             botao.checar_hover(posicao_mouse)
             botao.desenhar(screen)
         
-        return nivelAtual, ObjNivel, ObjetosNiveis
+        return nivelAtual, ObjNivel, ObjetosNiveis, player
 
     def telaDeVitoria(self, nivelAtual, ObjNivel, ObjetosNiveis):
         posicao_mouse = pygame.mouse.get_pos()

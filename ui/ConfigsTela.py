@@ -22,6 +22,15 @@ class ConfigsTela:
         }
         self.player_posicao = Player(0, 0, 40, 40)
         
+        self.arquivos_tmx = {
+            "Hub": "mapas prontos/entrada.tmx",
+            1: "mapas prontos/sala1.tmx",
+            2: "mapas prontos/sala2.tmx",
+            3: "mapas prontos/sala3.tmx",
+            4: "mapas prontos/sala4.tmx"
+        }
+
+
         self.niveis =  {
         'Hub': Niveis('mapas prontos/entrada.tmx',self.player_posicao, self.largura_tela, self.altura_tela),
         1: Niveis('mapas prontos/sala1.tmx', self.player_posicao, self.largura_tela, self.altura_tela), 
