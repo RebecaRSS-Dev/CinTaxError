@@ -48,8 +48,8 @@ Se Byte entrar na área de dano de um inimigo, ele começará a persegui-lo!
 ### 2️⃣ Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/byte-adventure.git
-cd byte-adventure
+git clone https://github.com/RebecaRSS-Dev/CinTaxError.git
+cd CinTaxError
 ```
 
 ### 3️⃣ Criar ambiente virtual (opcional, mas recomendado)
@@ -57,7 +57,7 @@ cd byte-adventure
 ```bash
 python -m venv venv
 source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
+venv/Scripts/activate      # Windows
 ```
 
 ### 4️⃣ Instalar dependências
@@ -69,7 +69,7 @@ pip install -r requirements.txt
 ### 5️⃣ Executar o jogo
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 ---
