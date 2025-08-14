@@ -168,6 +168,9 @@ while True:
                 fonte_grande_1 = pygame.font.Font('./graphics/fonts/ari-w9500-bold.ttf', 28)
                 texto_efeito = fonte_grande_1.render(f"Efeito: {ObjNivel.player.efeito}", False, Cores.BRANCO)
                 screen.blit(texto_efeito, (largura_tela*0.82, 80))
+    if fluxoDeJogo.vitoria:
+        texto_pontuacao = fonte_grande.render(f"Você fez: {ObjNivel.player.pontuacao} Pontos!", False, Cores.BRANCO)
+        screen.blit(texto_pontuacao, (largura_tela*0.40, altura_tela*0.74))
 
     pygame.display.flip()
     pygame.time.Clock().tick(60)

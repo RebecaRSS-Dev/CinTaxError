@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="108">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="111">
  <tileset firstgid="1" name="pixel-cyberpunk-interior" tilewidth="32" tileheight="32" tilecount="231" columns="21">
   <image source="../graphics/tilesets/grades.png" width="672" height="352"/>
  </tileset>
@@ -137,6 +137,7 @@
   <object id="94" x="72" y="511" width="45.5" height="11.75"/>
   <object id="95" x="136.25" y="510.75" width="45" height="11.75"/>
   <object id="96" x="418.75" y="61.25" width="215.25" height="12.0833"/>
+  <object id="110" x="323" y="447" width="30" height="96.75"/>
  </objectgroup>
  <objectgroup id="8" name="Boss">
   <object id="98" name="Player" x="227" y="449">

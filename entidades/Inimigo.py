@@ -75,7 +75,7 @@ class Inimigo(pygame.sprite.Sprite):
             return
         direcao_principal = direcao_principal.normalize()
 
-        velocidade = 2.5
+        velocidade = 2
 
         angulos = [0, 25, -25, 45, -45, 65, -65, 90, -90]  # graus
         for ang in angulos:
