@@ -7,7 +7,7 @@ class ConfigsTela:
     def __init__(self):
 
         # Configuração Geral
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
         self.largura_tela, self.altura_tela = self.screen.get_size()
 
         # Fontes
