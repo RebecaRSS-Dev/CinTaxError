@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="43">
+ <tileset firstgid="1" source="../graphics/tilesets/pixel-cyberpunk-interior.tsx"/>
+ <layer id="1" name="Chão" width="20" height="20">
+  <data encoding="csv">
+3,3,3,3,3,3,3,4,5,5,5,5,5,5,5,5,5,5,5,5,
+24,24,24,24,24,24,24,25,26,26,26,26,26,26,26,26,26,26,26,26,
+43,64,45,43,43,43,43,43,64,64,45,64,64,64,64,43,64,43,43,43,
+43,64,45,45,43,64,64,64,43,43,45,43,43,43,64,64,64,45,43,43,
+43,64,64,45,64,64,43,43,43,43,43,45,64,64,64,64,64,45,43,45,
+64,64,64,45,43,43,64,43,43,43,43,64,45,43,64,64,45,64,43,45,
+64,64,43,43,45,43,43,64,64,64,64,64,43,45,45,45,64,64,45,43,
+43,64,43,43,45,43,43,64,64,64,43,43,64,43,64,43,64,64,45,43,
+43,43,64,43,43,45,43,64,43,45,45,45,45,45,64,64,43,64,45,43,
+43,43,64,3,3,3,3,4,5,5,5,5,5,5,5,5,5,5,5,5,
+43,43,64,24,24,24,24,25,26,26,26,26,26,26,26,26,26,26,26,26,
+64,64,43,64,43,43,43,43,43,43,43,43,43,64,64,43,64,45,43,43,
+43,43,43,43,64,43,43,43,43,43,43,43,43,64,64,43,64,45,43,43,
+43,43,43,43,43,64,64,43,43,43,43,43,64,64,64,64,64,43,43,43,
+3,3,3,4,5,5,5,5,5,5,64,64,64,43,64,64,43,43,43,43,
+24,24,24,25,26,26,26,26,26,26,64,43,43,45,45,45,43,43,45,45,
+43,43,43,43,43,43,43,43,43,43,43,43,43,45,43,45,45,45,45,43,
+64,64,64,43,43,43,43,43,43,43,43,43,43,45,43,43,45,45,43,43,
+43,43,43,64,64,64,64,43,43,43,43,43,43,45,43,45,45,45,43,43,
+43,43,43,43,43,43,64,64,43,43,43,43,43,43,45,45,43,43,43,43
+</data>
+ </layer>
+ <layer id="2" name="Paredes1" width="20" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1610612824,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,
+0,0,1610612823,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1610612823,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1610612823,0,0,0,0,0,0,0,0,0,0,0,0,0,74,162,163,95,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,74,183,184,95,
+87,87,87,87,87,87,87,87,87,87,88,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,2684354647,0,0,0,0,0,75,160,161,96,
+0,0,0,0,0,0,0,0,0,0,2684354647,0,0,0,0,0,75,181,182,96,
+0,0,0,0,0,0,0,0,0,0,2684354647,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,2684354647,0,0,0,0,0,74,162,163,95,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,74,183,184,95,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="3" name="Paredes2" width="20" height="20">
+  <data encoding="csv">
+61,62,63,0,0,0,0,0,0,33,0,0,0,0,0,0,0,0,9,10,
+112,113,114,0,0,8,49,50,51,8,0,0,0,0,0,0,0,0,0,0,
+133,134,135,0,158,0,77,77,77,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,118,119,0,0,118,119,0,0,0,
+0,0,160,161,0,160,161,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,181,182,0,181,182,0,0,0,0,118,119,0,0,118,119,0,0,0,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,198,199,200,201,0,198,199,200,201,0,0,0,0,
+12,0,0,0,0,0,0,219,220,221,222,0,219,220,221,222,0,0,0,0,
+0,0,0,19,20,21,61,62,63,40,41,42,61,62,63,0,14,15,9,10,
+12,0,0,70,71,72,70,71,72,70,71,72,70,71,72,0,0,0,0,0,
+0,0,0,78,78,78,78,78,78,78,78,78,78,78,78,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+61,62,63,0,0,61,62,63,9,10,0,0,0,0,0,0,0,0,0,0,
+49,50,51,49,50,51,49,50,51,0,0,0,0,0,0,0,0,0,0,0,
+77,77,77,77,77,77,77,77,77,77,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="4" name="Objetos" width="20" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,15,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,112,113,114,
+0,0,0,0,0,0,11,11,11,0,0,0,0,0,0,0,0,133,134,135,
+0,0,0,0,0,0,0,0,0,0,0,0,11,0,0,0,11,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,117,117,0,117,117,0,0,0,0,0,11,0,0,0,11,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,158,159,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,
+11,0,0,0,11,0,0,11,0,0,11,0,0,11,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,0,
+0,11,0,0,11,0,0,11,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="6" name="Collisions">
+  <object id="1" x="1" y="2.33285" width="639" height="65.3343"/>
+  <object id="2" x="94" y="289.333" width="546" height="66.6676"/>
+  <object id="3" x="1" y="449.333" width="327.333" height="68.3343"/>
+  <object id="4" x="355" y="162.833" width="57.6667" height="17.3343"/>
+  <object id="5" x="485.5" y="99.3329" width="55" height="16.6676"/>
+  <object id="6" x="356.5" y="99.3329" width="57.6667" height="16.6676"/>
+  <object id="7" x="485.5" y="162.666" width="53" height="18.001"/>
+  <object id="8" x="164.5" y="167.333" width="56" height="23.6676"/>
+  <object id="9" x="3" y="266.166" width="27" height="9.66763"/>
+  <object id="10" x="67.3333" y="166.833" width="56" height="25.001"/>
+  <object id="11" x="1.5" y="201.833" width="29.6667" height="11.001"/>
+  <object id="12" x="2.5" y="330.166" width="27" height="10.3343"/>
+  <object id="13" x="553.5" y="364.833" width="43" height="27.3343"/>
+  <object id="14" x="551.5" y="459.333" width="43" height="29.3343"/>
+  <object id="15" x="553.5" y="558.333" width="43" height="27.3343"/>
+  <object id="16" x="575.5" y="228.333" width="64" height="27.3343"/>
+  <object id="17" x="128.5" y="67.3329" width="32" height="29.3343"/>
+  <object id="18" x="193.5" y="63.3329" width="94" height="16.3343"/>
+  <object id="19" x="-6.5" y="25.3329" width="7.72727" height="614.122"/>
+  <object id="20" x="639.47" y="26.7723" width="7.72727" height="614.122"/>
+  <object id="21" x="642.803" y="639.606" width="7.72727" height="648.789" rotation="90"/>
+  <object id="34" x="320" y="437" width="10.5" height="140"/>
+  <object id="35" x="1.5" y="437.5" width="329" height="10.5"/>
+  <object id="36" x="-4.5" y="638.5" width="647.5" height="8"/>
+  <object id="37" x="86.6667" y="279.333" width="9.33333" height="105.333"/>
+  <object id="38" x="86.6667" y="277.333" width="554" height="11.3333"/>
+ </objectgroup>
+ <objectgroup id="7" name="Boss">
+  <object id="22" name="Player" x="37.3333" y="140">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="pos" value="plant"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="23" name="Player" x="593.333" y="172">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="pos" value="plant"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="24" name="Player" x="424" y="467.334">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="pos" value="plant"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="Coletaveis">
+  <object id="25" name="velocidade" x="128.667" y="260.667">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="27" name="invencibilidade" x="416" y="606.667">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="29" name="pontos" x="209" y="417.334">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="30" name="pontos" x="544" y="261.333">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="31" name="pontos" x="614.667" y="549.333">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="32" name="pontos" x="318.667" y="102.667">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="41" name="fragmento" x="456" y="162">
+   <point/>
+  </object>
+  <object id="42" name="velocidade" x="599" y="439">
+   <properties>
+    <property name="change_direction" type="bool" value="true"/>
+    <property name="character_id" value="o5"/>
+    <property name="direction" value="up"/>
+    <property name="graphic" value="straw"/>
+    <property name="radius" value="400"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="player_start">
+  <object id="33" name="player_start" x="55.5" y="599.167">
+   <point/>
+  </object>
+ </objectgroup>
+</map>
